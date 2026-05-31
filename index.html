@@ -2,1196 +2,712 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>完形与容器 · 一份给父母的内在工作手册</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>完形与容器 · 父母内在工作</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #F4EEE2;
-    --paper-light: #FAF6EC;
-    --paper-dark: #E8E1D2;
-    --ink: #2A2418;
-    --ink-soft: #5C5341;
-    --ink-faint: #8A7F6A;
-    --cinnabar: #9B3324;
-    --cinnabar-soft: #C45A4A;
-    --celadon: #6F8F7D;
-    --line: #C9BFA8;
+    --paper:#F4EEE2; --paper-light:#FAF6EC; --paper-card:#FBF8F0; --paper-dark:#E8E1D2;
+    --ink:#2A2418; --ink-soft:#5C5341; --ink-faint:#8A7F6A;
+    --cinnabar:#9B3324; --cinnabar-soft:#C45A4A; --celadon:#6F8F7D; --celadon-deep:#557060;
+    --line:#C9BFA8; --gold:#B8924A;
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Noto Serif SC', 'Songti SC', serif;
-    font-weight: 400;
-    line-height: 1.85;
-    min-height: 100vh;
-    /* subtle paper grain */
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(180,150,100,0.04) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(155,51,36,0.025) 0%, transparent 50%);
-  }
-
-  .page {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 60px 40px 80px;
-  }
-
-  /* ============ Header ============ */
-  .masthead {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 40px;
-    align-items: end;
-    padding-bottom: 32px;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 48px;
-    position: relative;
-  }
-
-  .masthead::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 60px;
-    height: 5px;
-    background: var(--cinnabar);
-  }
-
-  .masthead h1 {
-    font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif;
-    font-size: clamp(38px, 5vw, 58px);
-    font-weight: 400;
-    letter-spacing: 4px;
-    line-height: 1.15;
-    color: var(--ink);
-  }
-
-  .masthead h1 .title-en {
-    display: block;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.32em;
-    font-weight: 400;
-    letter-spacing: 6px;
-    color: var(--ink-soft);
-    margin-top: 14px;
-    text-transform: lowercase;
-  }
-
-  .masthead .meta {
-    text-align: right;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--ink-soft);
-    font-size: 15px;
-    letter-spacing: 2px;
-    line-height: 1.7;
-  }
-
-  .masthead .meta .seal {
-    display: inline-block;
-    background: var(--cinnabar);
-    color: var(--paper-light);
-    font-family: 'Noto Serif SC', serif;
-    font-style: normal;
-    padding: 4px 10px;
-    font-size: 13px;
-    letter-spacing: 4px;
-    margin-bottom: 8px;
-  }
-
-  /* ============ Layout ============ */
-  .layout {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 64px;
-    align-items: start;
-  }
-
-  /* ============ Sidebar TOC ============ */
-  .toc {
-    position: sticky;
-    top: 30px;
-    padding-right: 12px;
-  }
-
-  .toc-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 14px;
-    letter-spacing: 5px;
-    color: var(--ink-faint);
-    text-transform: uppercase;
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .toc ul { list-style: none; }
-
-  .toc li {
-    position: relative;
-    padding: 9px 0 9px 38px;
-    cursor: pointer;
-    font-size: 15.5px;
-    color: var(--ink-soft);
-    transition: all 0.3s ease;
-    line-height: 1.5;
-  }
-
-  .toc li::before {
-    content: attr(data-num);
-    position: absolute;
-    left: 0;
-    top: 9px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ink-faint);
-    letter-spacing: 1px;
-  }
-
-  .toc li:hover { color: var(--ink); }
-
-  .toc li.active {
-    color: var(--cinnabar);
-    font-weight: 500;
-  }
-
-  .toc li.active::before { color: var(--cinnabar); }
-
-  .toc li.active::after {
-    content: '';
-    position: absolute;
-    left: -16px;
-    top: 16px;
-    width: 4px;
-    height: 4px;
-    background: var(--cinnabar);
-    border-radius: 50%;
-  }
-
-  .toc .en {
-    display: block;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 12px;
-    color: var(--ink-faint);
-    letter-spacing: 2px;
-    margin-top: 2px;
-  }
-
-  /* ============ Main content ============ */
-  .module {
-    display: none;
-    animation: fade-in 0.6s ease forwards;
-  }
-  .module.active { display: block; }
-
-  @keyframes fade-in {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .module-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: var(--cinnabar);
-    letter-spacing: 5px;
-    margin-bottom: 8px;
-  }
-
-  .module-title {
-    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
-    font-size: 42px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    color: var(--ink);
-    margin-bottom: 6px;
-    line-height: 1.2;
-  }
-
-  .module-title-en {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 22px;
-    color: var(--ink-soft);
-    letter-spacing: 3px;
-    margin-bottom: 36px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--line);
-    position: relative;
-  }
-
-  .module-title-en::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 30px;
-    height: 3px;
-    background: var(--cinnabar);
-  }
-
-  .quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 19px;
-    color: var(--ink-soft);
-    padding: 0 0 0 24px;
-    border-left: 2px solid var(--cinnabar);
-    margin: 0 0 36px;
-    line-height: 1.6;
-  }
-
-  .quote .src {
-    display: block;
-    font-size: 14px;
-    color: var(--ink-faint);
-    letter-spacing: 2px;
-    margin-top: 6px;
-  }
-
-  .section {
-    margin-bottom: 38px;
-  }
-
-  .section h3 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 8px;
-    color: var(--cinnabar);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .section h3::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: var(--cinnabar);
-    transform: rotate(45deg);
-    flex-shrink: 0;
-  }
-
-  .section h3 .h-en {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 13px;
-    color: var(--ink-faint);
-    letter-spacing: 3px;
-    margin-left: auto;
-  }
-
-  .section p {
-    font-size: 16.5px;
-    color: var(--ink);
-    margin-bottom: 14px;
-  }
-
-  .section ul {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .section ul li {
-    position: relative;
-    padding-left: 24px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: var(--ink);
-  }
-
-  .section ul li::before {
-    content: '·';
-    position: absolute;
-    left: 8px;
-    top: -2px;
-    color: var(--cinnabar);
-    font-size: 22px;
-    line-height: 1.4;
-  }
-
-  .reflection-box {
-    background: var(--paper-light);
-    border: 1px solid var(--line);
-    padding: 26px 30px;
-    margin: 14px 0 0;
-    position: relative;
-  }
-
-  .reflection-box::before {
-    content: '问';
-    position: absolute;
-    top: -14px;
-    left: 24px;
-    background: var(--cinnabar);
-    color: var(--paper-light);
-    font-size: 14px;
-    padding: 3px 12px;
-    letter-spacing: 4px;
-    font-weight: 500;
-  }
-
-  .reflection-box p {
-    font-size: 16.5px;
-    color: var(--ink);
-    font-style: normal;
-    margin: 0;
-    line-height: 1.8;
-  }
-
-  .practice-box {
-    background: var(--paper-light);
-    border: 1px solid var(--line);
-    padding: 26px 30px;
-    margin: 14px 0 0;
-    position: relative;
-  }
-
-  .practice-box::before {
-    content: '行';
-    position: absolute;
-    top: -14px;
-    left: 24px;
-    background: var(--celadon);
-    color: var(--paper-light);
-    font-size: 14px;
-    padding: 3px 12px;
-    letter-spacing: 4px;
-    font-weight: 500;
-  }
-
-  .practice-box p {
-    font-size: 16.5px;
-    color: var(--ink);
-    margin: 0;
-    line-height: 1.8;
-  }
-
-  .practice-box strong {
-    color: var(--celadon);
-    font-weight: 600;
-  }
-
-  .reflection-box strong, .module strong {
-    color: var(--cinnabar);
-    font-weight: 600;
-  }
-
-  /* ============ Navigation buttons ============ */
-  .nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 64px;
-    padding-top: 32px;
-    border-top: 1px solid var(--line);
-  }
-
-  .nav-btn {
-    background: transparent;
-    border: 1px solid var(--line);
-    padding: 14px 26px;
-    cursor: pointer;
-    font-family: 'Noto Serif SC', serif;
-    font-size: 14px;
-    color: var(--ink);
-    letter-spacing: 4px;
-    transition: all 0.3s ease;
-    text-align: left;
-    min-width: 180px;
-  }
-
-  .nav-btn:hover {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-  }
-
-  .nav-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  .nav-btn .dir {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 12px;
-    color: var(--ink-faint);
-    display: block;
-    margin-bottom: 4px;
-    letter-spacing: 2px;
-  }
-
-  .nav-btn:hover .dir {
-    color: var(--paper-dark);
-  }
-
-  /* ============ Intro module specific ============ */
-  .intro-lead {
-    font-size: 19px;
-    color: var(--ink);
-    line-height: 2;
-    margin-bottom: 26px;
-    font-weight: 400;
-  }
-
-  .intro-lead .first-char {
-    font-family: 'Ma Shan Zheng', serif;
-    font-size: 1.8em;
-    color: var(--cinnabar);
-    float: left;
-    line-height: 1;
-    padding: 8px 12px 0 0;
-  }
-
-  /* ============ Container module ============ */
-  .container-quality {
-    background: var(--paper-light);
-    border: 1px solid var(--line);
-    padding: 28px 32px;
-    margin-bottom: 16px;
-    position: relative;
-  }
-
-  .container-quality .cq-num {
-    position: absolute;
-    top: -16px;
-    left: 28px;
-    background: var(--cinnabar);
-    color: var(--paper-light);
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-  }
-
-  .container-quality h4 {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--cinnabar);
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-  }
-
-  .container-quality h4 .cq-en {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 400;
-    color: var(--ink-faint);
-    font-size: 15px;
-    margin-left: 8px;
-  }
-
-  /* ============ Closing checklist ============ */
-  .checklist-section {
-    margin-bottom: 36px;
-  }
-
-  .checklist-section .cl-title {
-    font-family: 'ZCOOL XiaoWei', serif;
-    font-size: 24px;
-    color: var(--cinnabar);
-    margin-bottom: 18px;
-    letter-spacing: 2px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--line);
-  }
-
-  /* ============ Mobile ============ */
-  @media (max-width: 880px) {
-    .page { padding: 30px 22px 50px; }
-    .masthead {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .masthead .meta { text-align: left; }
-    .layout {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .toc {
-      position: static;
-      background: var(--paper-light);
-      padding: 20px;
-      border: 1px solid var(--line);
-    }
-    .toc ul {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-    }
-    .module-title { font-size: 32px; }
-    .nav-btn { min-width: 0; padding: 12px 16px; font-size: 13px; }
-  }
-
-  /* ============ Print ============ */
-  @media print {
-    .toc, .nav-buttons { display: none; }
-    .module { display: block !important; page-break-after: always; }
-    .layout { grid-template-columns: 1fr; }
-    body { background: white; }
-  }
+  * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+  html, body { background:var(--paper); color:var(--ink); font-family:'Noto Serif SC','Songti SC',serif; line-height:1.85; min-height:100vh;
+    background-image:radial-gradient(circle at 15% 20%, rgba(180,150,100,0.05) 0%, transparent 45%), radial-gradient(circle at 85% 75%, rgba(155,51,36,0.03) 0%, transparent 45%); }
+  .app { max-width:720px; margin:0 auto; min-height:100vh; position:relative; }
+  .view { display:none; animation:slide-in 0.4s cubic-bezier(0.22,1,0.36,1); }
+  .view.active { display:block; }
+  @keyframes slide-in { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
+  .topbar { position:sticky; top:0; z-index:50; background:rgba(244,238,226,0.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); padding:14px 22px; display:flex; align-items:center; gap:14px; min-height:56px; }
+  .back-btn { background:none; border:none; cursor:pointer; font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--cinnabar); font-size:16px; letter-spacing:1px; display:flex; align-items:center; gap:6px; padding:6px 4px; }
+  .back-btn::before { content:'←'; font-size:18px; }
+  .topbar-title { font-size:15px; letter-spacing:3px; color:var(--ink-soft); font-weight:500; }
+  .topbar-spacer { flex:1; }
+  .home-header { padding:46px 26px 26px; text-align:center; }
+  .home-header .seal { display:inline-block; background:var(--cinnabar); color:var(--paper-light); font-size:12px; letter-spacing:5px; padding:4px 14px; margin-bottom:20px; }
+  .home-header h1 { font-family:'Ma Shan Zheng',serif; font-weight:400; font-size:clamp(40px,11vw,58px); letter-spacing:6px; line-height:1.1; color:var(--ink); }
+  .home-header .subtitle { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--ink-soft); font-size:16px; letter-spacing:3px; margin-top:14px; }
+  .home-header .desc { font-size:14.5px; color:var(--ink-faint); margin-top:18px; line-height:1.8; max-width:380px; margin-left:auto; margin-right:auto; }
+  .narr-card { margin:0 22px 22px; background:var(--ink); color:var(--paper); border-radius:6px; padding:20px 22px; }
+  .narr-head { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:16px; }
+  .narr-title { font-size:17px; font-weight:500; letter-spacing:2px; display:flex; align-items:center; gap:8px; }
+  .narr-title .ic { color:var(--cinnabar-soft); font-size:18px; }
+  .narr-sub { font-size:12px; color:var(--paper-dark); letter-spacing:1px; }
+  .narr-controls { display:flex; gap:10px; align-items:center; }
+  .narr-play { flex:1; background:var(--cinnabar); color:var(--paper-light); border:none; padding:14px; font-family:'Noto Serif SC',serif; font-size:16px; letter-spacing:4px; cursor:pointer; border-radius:4px; transition:background 0.2s; }
+  .narr-play:active { transform:scale(0.99); }
+  .narr-mini { background:transparent; color:var(--paper-dark); border:1px solid rgba(244,238,226,0.3); width:50px; padding:14px 0; font-size:18px; cursor:pointer; border-radius:4px; }
+  .narr-now { font-size:13px; color:var(--paper-dark); margin-top:14px; line-height:1.6; min-height:20px; }
+  .narr-bar { height:3px; background:rgba(244,238,226,0.18); border-radius:2px; margin-top:10px; overflow:hidden; }
+  .narr-bar-fill { height:100%; width:0%; background:var(--cinnabar-soft); transition:width 0.3s ease; }
+  .narr-toggle-script { display:block; width:100%; background:none; border:none; color:var(--ink-faint); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; letter-spacing:1px; cursor:pointer; text-decoration:underline; margin:-6px 0 22px; text-align:center; }
+  .narr-script { margin:0 22px 22px; background:var(--paper-card); border:1px solid var(--line); border-radius:4px; padding:20px 22px; font-size:15px; line-height:1.9; display:none; }
+  .narr-script.show { display:block; }
+  .narr-script p { margin-bottom:14px; }
+  .narr-script .ns-h { color:var(--cinnabar); font-weight:600; letter-spacing:2px; }
+  .progress-card { margin:0 22px 26px; background:var(--paper-card); border:1px solid var(--line); border-radius:2px; padding:22px 24px; display:flex; align-items:center; gap:22px; }
+  .ring-wrap { position:relative; width:76px; height:76px; flex-shrink:0; }
+  .ring-wrap svg { transform:rotate(-90deg); }
+  .ring-bg { fill:none; stroke:var(--paper-dark); stroke-width:7; }
+  .ring-fg { fill:none; stroke:var(--cinnabar); stroke-width:7; stroke-linecap:round; transition:stroke-dashoffset 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .ring-text { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-style:italic; }
+  .ring-text .pct { font-size:22px; color:var(--cinnabar); line-height:1; }
+  .progress-info { flex:1; }
+  .progress-info .pi-title { font-size:16px; font-weight:500; letter-spacing:1px; margin-bottom:4px; }
+  .progress-info .pi-sub { font-size:13.5px; color:var(--ink-faint); line-height:1.7; }
+  .daily-banner { margin:0 22px 28px; background:linear-gradient(135deg, rgba(111,143,125,0.12), rgba(111,143,125,0.04)); border:1px solid rgba(111,143,125,0.35); border-radius:2px; padding:18px 22px; }
+  .daily-banner .db-label { font-size:11px; letter-spacing:4px; color:var(--celadon-deep); font-weight:600; margin-bottom:8px; }
+  .daily-banner .db-text { font-size:15px; color:var(--ink); line-height:1.7; font-style:italic; }
+  .sec-label { padding:0 26px; margin-bottom:16px; display:flex; align-items:center; gap:12px; }
+  .sec-label .sl-cn { font-size:15px; letter-spacing:4px; color:var(--ink-soft); font-weight:500; }
+  .sec-label .sl-en { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:var(--ink-faint); letter-spacing:2px; }
+  .sec-label .sl-line { flex:1; height:1px; background:var(--line); }
+  .card-list { padding:0 22px 30px; display:flex; flex-direction:column; gap:12px; }
+  .lesson-card { background:var(--paper-card); border:1px solid var(--line); border-radius:2px; padding:20px 22px; cursor:pointer; display:flex; align-items:center; gap:18px; transition:all 0.25s ease; position:relative; overflow:hidden; }
+  .lesson-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--cinnabar); transform:scaleY(0); transform-origin:top; transition:transform 0.3s ease; }
+  .lesson-card:active { transform:scale(0.985); }
+  .lesson-card:hover::before { transform:scaleY(1); }
+  .lesson-card.done { background:var(--paper-light); }
+  .lesson-card.deep { background:rgba(184,146,74,0.06); }
+  .lesson-card .lc-num { font-family:'Ma Shan Zheng',serif; font-size:30px; color:var(--cinnabar); width:40px; text-align:center; flex-shrink:0; line-height:1; }
+  .lesson-card.deep .lc-num { color:var(--gold); }
+  .lesson-card .lc-body { flex:1; min-width:0; }
+  .lesson-card .lc-title { font-size:18px; font-weight:500; letter-spacing:1px; margin-bottom:3px; }
+  .lesson-card .lc-en { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:var(--ink-faint); letter-spacing:2px; }
+  .lesson-card .lc-status { flex-shrink:0; font-size:12px; }
+  .badge { display:inline-flex; align-items:center; gap:5px; font-size:11px; letter-spacing:1px; padding:4px 9px; border-radius:2px; }
+  .badge.read { background:var(--cinnabar); color:var(--paper-light); }
+  .badge.read::before { content:'✓'; }
+  .badge.note { background:rgba(184,146,74,0.18); color:var(--gold); }
+  .badge.note::before { content:'✎'; }
+  .badge.unread { color:var(--ink-faint); border:1px solid var(--line); }
+  .practice-entry { margin:4px 22px 40px; background:var(--ink); color:var(--paper); border-radius:2px; padding:22px 24px; cursor:pointer; display:flex; align-items:center; gap:16px; transition:all 0.25s ease; }
+  .practice-entry:active { transform:scale(0.985); }
+  .practice-entry .pe-icon { font-family:'Ma Shan Zheng',serif; font-size:32px; color:var(--cinnabar-soft); }
+  .practice-entry .pe-body { flex:1; }
+  .practice-entry .pe-title { font-size:17px; font-weight:500; letter-spacing:2px; }
+  .practice-entry .pe-sub { font-size:13px; color:var(--paper-dark); margin-top:3px; letter-spacing:1px; }
+  .practice-entry .pe-arrow { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--cinnabar-soft); font-size:20px; }
+  .lesson-content { padding:30px 26px 40px; }
+  .lesson-num { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; color:var(--cinnabar); letter-spacing:5px; margin-bottom:8px; }
+  .lesson-title { font-family:'ZCOOL XiaoWei',serif; font-size:40px; font-weight:400; letter-spacing:2px; line-height:1.15; margin-bottom:4px; }
+  .lesson-title-en { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:var(--ink-soft); letter-spacing:3px; padding-bottom:24px; margin-bottom:28px; border-bottom:1px solid var(--line); position:relative; }
+  .lesson-title-en::after { content:''; position:absolute; bottom:-2px; left:0; width:30px; height:3px; background:var(--cinnabar); }
+  .quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--ink-soft); padding-left:20px; border-left:2px solid var(--cinnabar); margin-bottom:30px; line-height:1.6; }
+  .quote .src { display:block; font-size:13px; color:var(--ink-faint); letter-spacing:2px; margin-top:6px; }
+  .block { margin-bottom:30px; }
+  .block h3 { font-size:13px; font-weight:600; letter-spacing:7px; color:var(--cinnabar); margin-bottom:13px; display:flex; align-items:center; gap:12px; }
+  .block h3::before { content:''; width:7px; height:7px; background:var(--cinnabar); transform:rotate(45deg); flex-shrink:0; }
+  .block p { font-size:16px; margin-bottom:12px; }
+  .block ul { list-style:none; }
+  .block ul li { position:relative; padding-left:22px; margin-bottom:9px; font-size:15.5px; }
+  .block ul li::before { content:'·'; position:absolute; left:7px; top:-3px; color:var(--cinnabar); font-size:22px; }
+  strong { color:var(--cinnabar); font-weight:600; }
+  em { font-style:italic; color:var(--ink-soft); }
+  .box { border:1px solid var(--line); padding:22px 24px; margin-top:13px; position:relative; border-radius:2px; }
+  .box.q, .box.p { background:var(--paper-light); }
+  .box .box-tag { position:absolute; top:-13px; left:20px; color:var(--paper-light); font-size:13px; padding:3px 12px; letter-spacing:4px; font-weight:500; }
+  .box.q .box-tag { background:var(--cinnabar); }
+  .box.p .box-tag { background:var(--celadon); }
+  .box p { font-size:16px; margin:0; line-height:1.8; }
+  .box.p strong { color:var(--celadon-deep); }
+  .vs-pair { margin-bottom:16px; }
+  .vs-pair .vp-q { font-size:13px; letter-spacing:2px; color:var(--ink); margin-bottom:9px; font-weight:600; }
+  .vs-pair .vp-q .vp-n { color:var(--gold); margin-right:6px; }
+  .vs-pair .vp-row { display:flex; gap:10px; }
+  .vp-cell { flex:1; padding:12px 14px; border-radius:2px; font-size:14.5px; line-height:1.65; }
+  .vp-cell .lab { display:block; font-size:11px; letter-spacing:2px; font-weight:600; margin-bottom:5px; }
+  .vp-cell.emp { background:rgba(111,143,125,0.12); border:1px solid rgba(111,143,125,0.3); }
+  .vp-cell.emp .lab { color:var(--celadon-deep); }
+  .vp-cell.con { background:rgba(184,146,74,0.14); border:1px solid rgba(184,146,74,0.4); }
+  .vp-cell.con .lab { color:var(--gold); }
+  .vp-cell b { font-weight:600; color:inherit; }
+  @media (max-width:560px){ .vs-pair .vp-row{ flex-direction:column; } }
+  .reflect-zone { margin-top:30px; background:var(--paper-card); border:1px solid var(--line); border-radius:2px; padding:22px 24px; }
+  .reflect-zone .rz-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .reflect-zone .rz-title { font-size:14px; letter-spacing:4px; color:var(--gold); font-weight:600; display:flex; align-items:center; gap:8px; }
+  .reflect-zone .rz-title::before { content:'✎'; }
+  .reflect-zone .rz-saved { font-size:12px; color:var(--celadon-deep); letter-spacing:1px; opacity:0; transition:opacity 0.3s; }
+  .reflect-zone .rz-saved.show { opacity:1; }
+  .reflect-zone textarea { width:100%; min-height:110px; border:1px solid var(--line); background:var(--paper); border-radius:2px; padding:14px; font-family:inherit; font-size:15.5px; color:var(--ink); line-height:1.8; resize:vertical; outline:none; transition:border-color 0.2s; }
+  .reflect-zone textarea:focus { border-color:var(--gold); }
+  .reflect-zone textarea::placeholder { color:var(--ink-faint); font-style:italic; }
+  .lesson-foot { margin-top:28px; }
+  .mark-btn { width:100%; padding:16px; border:1px solid var(--cinnabar); background:transparent; color:var(--cinnabar); font-family:inherit; font-size:15px; letter-spacing:4px; cursor:pointer; border-radius:2px; transition:all 0.25s ease; margin-bottom:14px; }
+  .mark-btn.done { background:var(--cinnabar); color:var(--paper-light); }
+  .mark-btn:active { transform:scale(0.99); }
+  .pager { display:flex; gap:10px; }
+  .pager button { flex:1; padding:14px 12px; border:1px solid var(--line); background:var(--paper-card); font-family:inherit; cursor:pointer; border-radius:2px; transition:all 0.2s; text-align:left; }
+  .pager button:active { transform:scale(0.98); }
+  .pager button:disabled { opacity:0.35; cursor:not-allowed; }
+  .pager button .pg-dir { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:11px; color:var(--ink-faint); letter-spacing:2px; margin-bottom:3px; }
+  .pager button .pg-name { font-size:14px; color:var(--ink); letter-spacing:1px; }
+  .pager button.next { text-align:right; }
+  .intro-lead { font-size:17px; line-height:2; margin-bottom:22px; }
+  .intro-lead .fc { font-family:'Ma Shan Zheng',serif; font-size:1.7em; color:var(--cinnabar); float:left; line-height:1; padding:6px 12px 0 0; }
+  .cq { background:var(--paper-light); border:1px solid var(--line); border-radius:2px; padding:22px 24px; margin-bottom:14px; position:relative; }
+  .cq .cq-n { position:absolute; top:-15px; left:22px; background:var(--cinnabar); color:var(--paper-light); width:30px; height:30px; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-style:italic; border-radius:50%; }
+  .cq h4 { font-size:17px; color:var(--cinnabar); margin-bottom:8px; }
+  .cq h4 .cq-en { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:400; color:var(--ink-faint); font-size:14px; margin-left:8px; }
+  .cq p { font-size:15.5px; margin:0; }
+  .practice-content { padding:30px 26px 50px; }
+  .streak-card { background:var(--ink); color:var(--paper); border-radius:2px; padding:24px; margin-bottom:30px; display:flex; align-items:center; gap:20px; }
+  .streak-card .sc-flame { font-size:44px; line-height:1; }
+  .streak-card .sc-body { flex:1; }
+  .streak-card .sc-num { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:38px; color:var(--cinnabar-soft); line-height:1; }
+  .streak-card .sc-label { font-size:13px; color:var(--paper-dark); letter-spacing:2px; margin-top:4px; }
+  .streak-card .sc-checkin { background:var(--cinnabar); color:var(--paper-light); border:none; padding:12px 18px; font-family:inherit; font-size:14px; letter-spacing:3px; cursor:pointer; border-radius:2px; }
+  .streak-card .sc-checkin:disabled { background:var(--celadon-deep); opacity:0.85; }
+  .cl-group { margin-bottom:30px; }
+  .cl-group .clg-title { font-family:'ZCOOL XiaoWei',serif; font-size:22px; color:var(--cinnabar); letter-spacing:2px; margin-bottom:14px; padding-bottom:8px; border-bottom:1px dashed var(--line); display:flex; align-items:baseline; gap:10px; }
+  .cl-group .clg-title .clg-en { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:var(--ink-faint); letter-spacing:2px; }
+  .check-item { display:flex; align-items:flex-start; gap:13px; padding:12px 14px; cursor:pointer; border-radius:2px; transition:background 0.2s; margin-bottom:4px; }
+  .check-item:active { background:var(--paper-light); }
+  .check-box { width:22px; height:22px; border:1.5px solid var(--line); border-radius:2px; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px; transition:all 0.2s; }
+  .check-item.checked .check-box { background:var(--celadon); border-color:var(--celadon); }
+  .check-item.checked .check-box::after { content:'✓'; color:var(--paper-light); font-size:14px; }
+  .check-item.checked .ci-text { color:var(--ink-faint); }
+  .ci-text { font-size:15.5px; line-height:1.7; transition:color 0.2s; }
+  .reset-btn { display:block; margin:30px auto 0; background:none; border:none; color:var(--ink-faint); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; letter-spacing:1px; cursor:pointer; text-decoration:underline; }
+  .closing-box { margin-top:36px; background:var(--paper-light); border:1px solid var(--line); border-radius:2px; padding:26px; position:relative; }
+  .closing-box .cb-tag { position:absolute; top:-13px; left:22px; background:var(--cinnabar); color:var(--paper-light); padding:3px 14px; letter-spacing:4px; font-size:13px; }
+  .closing-box p { font-size:16px; line-height:2; margin:0; }
+  @media (min-width:600px) { .lesson-title { font-size:46px; } }
 </style>
 </head>
 <body>
-
-<div class="page">
-
-  <!-- ====== Masthead ====== -->
-  <header class="masthead">
-    <div>
-      <h1>
-        完形与容器
-        <span class="title-en">a handbook for inner parenting</span>
-      </h1>
+<div class="app">
+  <div class="view active" id="view-home">
+    <div class="home-header">
+      <span class="seal">内在工作</span>
+      <h1>完形与容器</h1>
+      <div class="subtitle">a handbook for inner parenting</div>
+      <div class="desc">给父母自己的功课 —— 学会觉察,守住边界,做孩子可以靠的容器。</div>
     </div>
-    <div class="meta">
-      <span class="seal">内在工作</span><br>
-      A field guide for parents<br>
-      drawn from Gestalt therapy<br>
-      &amp; the holding environment
+
+    <div class="narr-card">
+      <div class="narr-head">
+        <div class="narr-title"><span class="ic">▶</span>语音朗读</div>
+        <div class="narr-sub">全部内容浓缩版 · 开车时听</div>
+      </div>
+      <div class="narr-controls">
+        <button class="narr-play" id="narrPlay">朗读全部</button>
+        <button class="narr-mini" id="narrRestart" title="从头开始">↺</button>
+      </div>
+      <div class="narr-now" id="narrNow">点一下开始朗读。可暂停,可从头听。</div>
+      <div class="narr-bar"><div class="narr-bar-fill" id="narrBar"></div></div>
     </div>
-  </header>
-
-  <!-- ====== Layout ====== -->
-  <div class="layout">
-
-    <!-- ====== TOC ====== -->
-    <nav class="toc">
-      <div class="toc-label">contents · 目录</div>
-      <ul id="toc-list">
-        <li data-num="序" data-target="m-intro" class="active">引言<span class="en">why gestalt for parents</span></li>
-        <li data-num="一" data-target="m-1">觉察<span class="en">awareness</span></li>
-        <li data-num="二" data-target="m-2">此时此刻<span class="en">here & now</span></li>
-        <li data-num="三" data-target="m-3">图形与背景<span class="en">figure & ground</span></li>
-        <li data-num="四" data-target="m-4">接触与边界<span class="en">contact boundary</span></li>
-        <li data-num="五" data-target="m-5">融合<span class="en">confluence</span></li>
-        <li data-num="六" data-target="m-6">投射<span class="en">projection</span></li>
-        <li data-num="七" data-target="m-7">内摄<span class="en">introjection</span></li>
-        <li data-num="八" data-target="m-8">未完成事件<span class="en">unfinished business</span></li>
-        <li data-num="终" data-target="m-9">做孩子的容器<span class="en">the container</span></li>
-        <li data-num="附" data-target="m-10">日常实践清单<span class="en">daily practice</span></li>
-      </ul>
-    </nav>
-
-    <!-- ====== Modules ====== -->
-    <main id="modules">
-
-      <!-- INTRO -->
-      <section class="module active" id="m-intro">
-        <div class="module-num">PREFACE · 序</div>
-        <h2 class="module-title">为什么是完形,为什么是容器</h2>
-        <p class="module-title-en">an opening note</p>
-
-        <p class="intro-lead">
-          <span class="first-char">这</span>是一本给父母自己看的小册子。它不是讲怎么教孩子读书、怎么管屏幕时间、怎么和老师沟通。它要陪你做的,是更慢一点的工作 —— 看见你自己。
-        </p>
-
-        <p class="intro-lead">
-          因为在亲子关系里,真正的边界不是来自规则,而是来自父母对自身的清晰。真正的"容器",不是耐心训练出来的,而是当你的内在足够稳,你自然就成了一个孩子可以靠的地方。
-        </p>
-
-        <div class="section">
-          <h3>两个传统的交汇 <span class="h-en">two lineages</span></h3>
-          <p>
-            <strong>完形治疗</strong>(Gestalt Therapy)由 Fritz Perls 在 1950 年代创立,核心信念是:<em>人是整体的,改变发生在觉察之中</em>。它教你看清此刻、看清你的反应从哪里来。
-          </p>
-          <p>
-            <strong>容器</strong>(Container)这个比喻来自 Bion 和温尼科特(Winnicott)的"抱持环境"。一个好的容器能盛放孩子的情绪、混乱、失败 —— 不被吞没,也不急着修复。
-          </p>
-          <p>
-            完形教你<strong>觉察</strong>,容器思维教你<strong>承接</strong>。这本手册把两者编织在一起,做成九个可以慢慢消化的练习。
-          </p>
-        </div>
-
-        <div class="section">
-          <h3>怎么使用这本手册 <span class="h-en">how to read</span></h3>
-          <p>不必一次读完。建议一周一章,读完后给自己 5-10 分钟,只是坐着,让那一章的问题在你心里发酵。</p>
-          <p>每章包含四个部分:</p>
-          <ul>
-            <li><strong>是什么</strong> —— 概念本身</li>
-            <li><strong>为什么对父母重要</strong> —— 它和你养孩子的关系</li>
-            <li><strong>反思问题</strong> —— 给自己问的</li>
-            <li><strong>日常练习</strong> —— 一句话能用起来的事</li>
-          </ul>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn" disabled><span class="dir">— previous —</span>已是开篇</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>第一章 · 觉察</button>
-        </div>
-      </section>
-
-      <!-- M1 AWARENESS -->
-      <section class="module" id="m-1">
-        <div class="module-num">CHAPTER ONE · 一</div>
-        <h2 class="module-title">觉察</h2>
-        <p class="module-title-en">awareness</p>
-
-        <div class="quote">
-          "Awareness in itself is curative."
-          <span class="src">— Fritz Perls</span>
-        </div>
-
-        <div class="section">
-          <h3>是什么 <span class="h-en">what it is</span></h3>
-          <p>觉察不是分析,不是评判,而是单纯地<strong>注意到此刻发生了什么</strong> —— 我身体的感觉、我的情绪、我的呼吸,孩子的表情,房间的温度。</p>
-          <p>完形相信:当一个人真正觉察到自己在做什么、感受什么,改变就已经在发生了。我们大部分的"问题",并不是因为我们不知道答案,而是因为我们处在<em>无觉察</em>的自动驾驶里。</p>
-        </div>
-
-        <div class="section">
-          <h3>为什么对父母重要 <span class="h-en">why it matters</span></h3>
-          <p>大多数对孩子的情绪化反应,都发生在父母无觉察的自动驾驶状态。当孩子拖延、顶嘴、考试失利,我们的反应往往是几十年前内化的模式 —— 来自我们自己父母的某个表情、某句话 —— 而不是此刻这个孩子真正需要的回应。</p>
-          <p>觉察让你在"刺激"和"反应"之间,撑开一条缝。那条缝里,才有选择。</p>
-        </div>
-
-        <div class="section">
-          <h3>反思问题 <span class="h-en">for reflection</span></h3>
-          <div class="reflection-box">
-            <p>今天我和孩子互动时,我<strong>最先注意到的</strong>是什么?是他的表现,还是他的状态?是他做了什么,还是他此刻是谁?</p>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>日常练习 <span class="h-en">daily practice</span></h3>
-          <div class="practice-box">
-            <p>每次和孩子开口对话前,先深吸一口气,在心里问一句:<strong>"我此刻在哪里?"</strong> —— 是在过去(担心他变成什么样)?在未来(怕他考不好)?还是真正在他面前?</p>
-          </div>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>序 · 引言</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>第二章 · 此时此刻</button>
-        </div>
-      </section>
-
-      <!-- M2 HERE NOW -->
-      <section class="module" id="m-2">
-        <div class="module-num">CHAPTER TWO · 二</div>
-        <h2 class="module-title">此时此刻</h2>
-        <p class="module-title-en">here & now</p>
-
-        <div class="quote">
-          "Nothing exists except the now."
-          <span class="src">— Fritz Perls</span>
-        </div>
-
-        <div class="section">
-          <h3>是什么 <span class="h-en">what it is</span></h3>
-          <p>完形治疗最革命性的主张:<strong>生活只发生在当下</strong>。所有的接触、所有真实的改变,都只能在此刻发生。</p>
-          <p>过去和未来当然存在,但它们存在的方式,是<em>此刻我对它们的想法</em>。当你在为孩子的明天焦虑,你不是在明天,你是在今天的焦虑里 —— 而你的孩子,正在今天等你看见他。</p>
-        </div>
-
-        <div class="section">
-          <h3>为什么对父母重要 <span class="h-en">why it matters</span></h3>
-          <p>教育焦虑的本质,是父母活在一个<strong>"未来的孩子"</strong>里 —— 他将来能不能进好学校、能不能立足社会、会不会幸福。我们看不见眼前这个 8 岁的他、12 岁的他、就是此刻这个样子的他。</p>
-          <p>但孩子是被<em>此刻</em>滋养长大的,不是被未来。你给他的每一次此刻的注视、此刻的回应,都在塑造他对自己的感受。</p>
-        </div>
-
-        <div class="section">
-          <h3>反思问题 <span class="h-en">for reflection</span></h3>
-          <div class="reflection-box">
-            <p>我和孩子最近的几次冲突,有多少是关于<strong>现在的他</strong>,有多少是关于<strong>我想象中那个未来的他</strong>?</p>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>日常练习 <span class="h-en">daily practice</span></h3>
-          <div class="practice-box">
-            <p>每天给孩子留 <strong>15 分钟纯粹的此刻</strong> —— 不规划、不评估、不教育、不引导,只是和他一起做一件他自己选的事。哪怕他选的是发呆。</p>
-          </div>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>第一章 · 觉察</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>第三章 · 图形与背景</button>
-        </div>
-      </section>
-
-      <!-- M3 FIGURE GROUND -->
-      <section class="module" id="m-3">
-        <div class="module-num">CHAPTER THREE · 三</div>
-        <h2 class="module-title">图形与背景</h2>
-        <p class="module-title-en">figure & ground</p>
-
-        <div class="quote">
-          看见,是一种选择。
-          <span class="src">— gestalt perception</span>
-        </div>
-
-        <div class="section">
-          <h3>是什么 <span class="h-en">what it is</span></h3>
-          <p>这是完形心理学最早的发现 —— 来自知觉研究。在任何画面里,我们的注意力<strong>只能聚焦一个"图形"</strong>(figure),其余的内容自动退为"背景"(ground)。</p>
-          <p>同一张画,你聚焦不同,看到的东西完全不同。著名的"老妇人/少女"错觉就是这样:画面没变,但你选择看哪里,决定了你看到谁。</p>
-        </div>
-
-        <div class="section">
-          <h3>为什么对父母重要 <span class="h-en">why it matters</span></h3>
-          <p>当孩子写作业拖延、当孩子哭闹、当孩子顶嘴 —— 你心里的<em>图形</em>是什么,决定了你看见的是哪个孩子:</p>
-          <ul>
-            <li>图形 = "他不努力" → 你看到一个<strong>懒惰</strong>的孩子</li>
-            <li>图形 = "他在害怕失败" → 你看到一个<strong>紧张</strong>的孩子</li>
-            <li>图形 = "他需要休息" → 你看到一个<strong>疲惫</strong>的孩子</li>
-            <li>图形 = "他在试探我的边界" → 你看到一个<strong>测试关系</strong>的孩子</li>
-          </ul>
-          <p>同一个行为,四种图形,通向四种完全不同的回应。教育上的许多冲突,源头不在孩子身上,而在父母选择把什么当成图形。</p>
-        </div>
-
-        <div class="section">
-          <h3>反思问题 <span class="h-en">for reflection</span></h3>
-          <div class="reflection-box">
-            <p>最近让我焦虑的孩子的某个"问题",我此刻的图形是什么?如果<strong>切换一个图形</strong>,我会看见什么不一样的孩子?</p>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>日常练习 <span class="h-en">daily practice</span></h3>
-          <div class="practice-box">
-            <p>当下次你又陷入"他怎么又……"的情绪时,刻意停一下,问自己:<strong>"我此刻聚焦的图形是什么?我是否漏看了什么背景?"</strong></p>
-          </div>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>第二章 · 此时此刻</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>第四章 · 接触与边界</button>
-        </div>
-      </section>
-
-      <!-- M4 CONTACT -->
-      <section class="module" id="m-4">
-        <div class="module-num">CHAPTER FOUR · 四</div>
-        <h2 class="module-title">接触与接触边界</h2>
-        <p class="module-title-en">contact & contact boundary</p>
-
-        <div class="quote">
-          真正的相遇,需要先有"我"和"你"。
-          <span class="src">— gestalt principle</span>
-        </div>
-
-        <div class="section">
-          <h3>是什么 <span class="h-en">what it is</span></h3>
-          <p>完形里有个核心概念叫"接触边界"(contact boundary)。它说的是 —— <strong>健康的关系建立在有边界的接触之上</strong>。接触不是融合。真正的接触,需要两个独立的人之间有一个清晰的界限,才能产生真实的相遇。</p>
-          <p>就像两个圆相切 —— 它们碰到了彼此,但仍是两个圆。如果它们合二为一,反而失去了"相遇"。</p>
-        </div>
-
-        <div class="section">
-          <h3>为什么对父母重要 <span class="h-en">why it matters</span></h3>
-          <p>"我都是为你好"常常是边界崩塌的信号。它表面上是爱,但底下藏着:<em>"我无法忍受你的人生有任何我不喜欢的部分。"</em></p>
-          <p>健康的父母接触是:</p>
-          <ul>
-            <li>我清楚什么是<strong>我的情绪</strong>,什么是<strong>你的情绪</strong></li>
-            <li>我能在场,但不替你感受</li>
-            <li>我能给建议,但不强加选择</li>
-            <li>我能为你担忧,但不让我的担忧成为你的负担</li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <h3>反思问题 <span class="h-en">for reflection</span></h3>
-          <div class="reflection-box">
-            <p>我和孩子之间的边界,<strong>哪些地方太松</strong>(我替他做了他能做的事/承担了他的情绪)?<strong>哪些地方太硬</strong>(我没有真正听见他、看见他)?</p>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>日常练习 <span class="h-en">daily practice</span></h3>
-          <div class="practice-box">
-            <p>今天试一次:当孩子有情绪时,<strong>只说一句话</strong> —— "我看到你很___,我在这里。" 不分析、不解决、不评论、不教育。只是看见,只是在。</p>
-          </div>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>第三章 · 图形与背景</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>第五章 · 融合</button>
-        </div>
-      </section>
-
-      <!-- M5 CONFLUENCE -->
-      <section class="module" id="m-5">
-        <div class="module-num">CHAPTER FIVE · 五</div>
-        <h2 class="module-title">融合</h2>
-        <p class="module-title-en">confluence</p>
-
-        <div class="quote">
-          当我说"我们",我有没有问过你?
-          <span class="src">— a parent's reflection</span>
-        </div>
-
-        <div class="section">
-          <h3>是什么 <span class="h-en">what it is</span></h3>
-          <p>融合(confluence)是完形里一种<strong>不健康的接触模式</strong>:"我"和"你"的边界消失了。我感觉你的感觉、你的成功是我的成功、你的失败是我的失败、你的痛是我的痛 —— 而我以为这就是爱。</p>
-          <p>融合的标志是:经常说"我们"而不是"我和你"。"我们今天作业还没写"、"我们这次考砸了"。</p>
-        </div>
-
-        <div class="section">
-          <h3>为什么对父母重要 <span class="h-en">why it matters</span></h3>
-          <p>华人家庭尤其容易陷入亲子融合,这是文化里"以家为单位"的根深蒂固。但融合带来一个隐性的伤害 —— <strong>它剥夺了孩子独立体验自己人生的机会</strong>。</p>
-          <p>孩子考砸了,母亲比孩子还要难受;孩子受委屈,父亲冲进学校理论;孩子退缩,全家陪着焦虑。这看似爱,实则是:<em>"你的情绪太大,所以由我来感受;你的失败太重,所以由我来承担。"</em></p>
-          <p>融合让孩子失去了练习"扛住自己"的机会。他长大后,会要么继续依附,要么用激烈的方式切断,才能找到自己。</p>
-        </div>
-
-        <div class="section">
-          <h3>反思问题 <span class="h-en">for reflection</span></h3>
-          <div class="reflection-box">
-            <p>最近一次孩子失败/受挫时,我体验到的那股情绪,<strong>有多少是他的,有多少是我自己的</strong>?那些是我的部分,是被什么激起来的?</p>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>日常练习 <span class="h-en">daily practice</span></h3>
-          <div class="practice-box">
-            <p>练习一句心咒,在感觉自己被孩子的情绪卷走时默念:<strong>"这是他的人生功课。我陪伴,不替代。我在岸上,不跳进河里。"</strong></p>
-          </div>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>第四章 · 接触与边界</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>第六章 · 投射</button>
-        </div>
-      </section>
-
-      <!-- M6 PROJECTION -->
-      <section class="module" id="m-6">
-        <div class="module-num">CHAPTER SIX · 六</div>
-        <h2 class="module-title">投射</h2>
-        <p class="module-title-en">projection</p>
-
-        <div class="quote">
-          我以为我在看你,其实我在看我自己。
-          <span class="src">— on parental projection</span>
-        </div>
-
-        <div class="section">
-          <h3>是什么 <span class="h-en">what it is</span></h3>
-          <p>投射(projection):把自己内在的东西 —— 情绪、欲望、恐惧、未实现的梦想 —— 放到别人身上,然后<strong>误以为那是对方的</strong>。</p>
-          <p>投射不是说谎,而是无觉察。我们真的相信,我们看到的是孩子,但其实我们看到的是自己投在孩子身上的影子。</p>
-        </div>
-
-        <div class="section">
-          <h3>为什么对父母重要 <span class="h-en">why it matters</span></h3>
-          <p>父母对孩子的投射,通常装在"为他好"的外壳里 ——</p>
-          <ul>
-            <li>我小时候没机会学钢琴 → 我儿子<strong>"喜欢"</strong>钢琴</li>
-            <li>我曾被同学排挤 → 我女儿<strong>"很在乎"</strong>社交</li>
-            <li>我害怕过平庸 → 我孩子<strong>"必须"</strong>优秀</li>
-            <li>我从小不敢表达 → 我孩子"应该"会说话</li>
-            <li>我吃过没学好英语的苦 → 我孩子"必须"双语</li>
-          </ul>
-          <p>每一条都可能是真的合理需求,也可能<em>大部分是父母的投射</em>。它的标志是:当孩子表现出和你的投射不同的样子时,你会有不成比例的失望或愤怒 —— 因为那不是关于他,是关于你内在那个未被疗愈的部分。</p>
-        </div>
-
-        <div class="section">
-          <h3>反思问题 <span class="h-en">for reflection</span></h3>
-          <div class="reflection-box">
-            <p>我<strong>最希望孩子拥有</strong>的特质或成就是什么?它和我自己人生里的某个缺憾、某个未完成、某个伤口,有没有关系?</p>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>日常练习 <span class="h-en">daily practice</span></h3>
-          <div class="practice-box">
-            <p>每当你<em>强烈</em>希望孩子做某件事时,在心里多问一次:<strong>"这是他的需要,还是我的需要?如果他不做,我难受的是什么?"</strong> —— 那个难受,通常就是投射的源头。</p>
-          </div>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>第五章 · 融合</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>第七章 · 内摄</button>
-        </div>
-      </section>
-
-      <!-- M7 INTROJECTION -->
-      <section class="module" id="m-7">
-        <div class="module-num">CHAPTER SEVEN · 七</div>
-        <h2 class="module-title">内摄</h2>
-        <p class="module-title-en">introjection</p>
-
-        <div class="quote">
-          我们都吞下了一些没消化的东西,然后用它教孩子。
-          <span class="src">— on inherited beliefs</span>
-        </div>
-
-        <div class="section">
-          <h3>是什么 <span class="h-en">what it is</span></h3>
-          <p>内摄(introjection):像吞咽一样,把别人(父母、老师、文化、社会)的观点<strong>不加咀嚼地</strong>接收下来,变成"我的"信念。</p>
-          <p>它的特点是:你以为这是你的想法,其实是你早年从某处吞下去的,从来没有真正消化、检验过。它住在你心里,但不是你长出来的。</p>
-        </div>
-
-        <div class="section">
-          <h3>为什么对父母重要 <span class="h-en">why it matters</span></h3>
-          <p>我们带着<em>大量的内摄</em>在做父母,而我们常常没意识到 ——</p>
-          <ul>
-            <li>"孩子不能输在起跑线上"</li>
-            <li>"严师出高徒,棍棒底下出孝子"</li>
-            <li>"三岁看大,七岁看老"</li>
-            <li>"孩子要懂事,要听话"</li>
-            <li>"哭是没用的,坚强一点"</li>
-            <li>"为母则刚 / 父亲就该威严"</li>
-            <li>"现在不逼他,将来他会怪你"</li>
-          </ul>
-          <p>这些不是你<em>思考</em>出来的,是你<em>吞下去</em>的。它们在每天塑造着你的教育方式,而你以为那就是"理所当然"。</p>
-          <p>内摄的危险在于:它让你失去选择。它替你做了决定,你还以为是你自己做的。</p>
-        </div>
-
-        <div class="section">
-          <h3>反思问题 <span class="h-en">for reflection</span></h3>
-          <div class="reflection-box">
-            <p>关于"什么是好父母"或"什么是好孩子",我心里<strong>最响亮的那句话</strong>是什么?是谁说的?是我父母、老师、社会、还是我自己?我此刻成年的我,真的同意它吗?</p>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>日常练习 <span class="h-en">daily practice</span></h3>
-          <div class="practice-box">
-            <p>找一张纸,列出 5 句你脑海里关于教育最常出现的"应该"。一句一句问:<strong>"我真的相信这句话吗?如果不信,我相信什么?"</strong> —— 写下来。这是把内摄咀嚼出来的开始。</p>
-          </div>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>第六章 · 投射</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>第八章 · 未完成事件</button>
-        </div>
-      </section>
-
-      <!-- M8 UNFINISHED -->
-      <section class="module" id="m-8">
-        <div class="module-num">CHAPTER EIGHT · 八</div>
-        <h2 class="module-title">未完成事件</h2>
-        <p class="module-title-en">unfinished business</p>
-
-        <div class="quote">
-          那些没说完的话,会一直找出口。
-          <span class="src">— gestalt principle</span>
-        </div>
-
-        <div class="section">
-          <h3>是什么 <span class="h-en">what it is</span></h3>
-          <p>未完成事件(unfinished business):过去未被充分表达、未被处理的情绪体验,会带着张力,<strong>寻找当下的出口</strong>。</p>
-          <p>完形治疗发现:人的心理系统天然追求"完形"(closure)—— 一件事如果没有被充分地经历、表达、消化,它就不会过去。它会在新的情境里反复重演,直到被看见。</p>
-        </div>
-
-        <div class="section">
-          <h3>为什么对父母重要 <span class="h-en">why it matters</span></h3>
-          <p>我们童年里那些没被听见的委屈、没被肯定的成就、没被允许的愤怒、没被回应的恐惧 —— 它们没有消失。它们等到我们成为父母后,会通过孩子<strong>重新激活</strong>。</p>
-          <p>这就是为什么:</p>
-          <ul>
-            <li>孩子哭闹时,我们格外烦躁 → 也许小时候我们的哭从来不被允许</li>
-            <li>孩子顶嘴时,我们格外愤怒 → 也许小时候我们从来不敢顶嘴</li>
-            <li>孩子退缩时,我们格外焦急 → 也许那让我们想起了曾经那个不敢往前的自己</li>
-            <li>孩子粘人时,我们格外想推开 → 也许我们小时候的依赖被嫌弃过</li>
-          </ul>
-          <p>那个"<em>格外</em>",往往就是未完成事件在说话。它说:"看见我。"</p>
-          <p>做父母,某种意义上是和自己童年最深的一次重逢。它逼着你处理那些你以为早就过去了的事。</p>
-        </div>
-
-        <div class="section">
-          <h3>反思问题 <span class="h-en">for reflection</span></h3>
-          <div class="reflection-box">
-            <p>孩子的<strong>哪个反应或哪种特质</strong>最容易激怒我或让我焦虑?当那个反应出现时,我的身体哪里紧?它让我想起谁?(可能是小时候的自己,也可能是我的父母)</p>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>日常练习 <span class="h-en">daily practice</span></h3>
-          <div class="practice-box">
-            <p>当你被孩子"按到按钮"、情绪突然炸开时 —— 深呼吸,在心里说:<strong>"现在这股力量,有多少属于这个孩子,有多少属于过去的我?"</strong> 这一句话不会立刻解决问题,但它把你从过去拉回到此刻。</p>
-          </div>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>第七章 · 内摄</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>整合 · 做孩子的容器</button>
-        </div>
-      </section>
-
-      <!-- M9 CONTAINER -->
-      <section class="module" id="m-9">
-        <div class="module-num">INTEGRATION · 终</div>
-        <h2 class="module-title">做孩子的容器</h2>
-        <p class="module-title-en">becoming the container</p>
-
-        <div class="quote">
-          The good-enough mother starts off with an almost complete adaptation to her infant's needs.
-          <span class="src">— D. W. Winnicott</span>
-        </div>
-
-        <div class="section">
-          <h3>什么是容器 <span class="h-en">what a container is</span></h3>
-          <p>温尼科特说的"抱持环境"(holding environment),Bion 说的"容器"(container),其实是同一件事 —— <strong>一个孩子可以靠的地方</strong>。</p>
-          <p>容器不是一个完美的妈妈或爸爸。容器是一个<em>稳定的存在</em>,它有三种品质 ——</p>
-        </div>
-
-        <div class="container-quality">
-          <div class="cq-num">1</div>
-          <h4>承接 <span class="cq-en">holding</span></h4>
-          <p>能盛住孩子的情绪、混乱、失败,而不打翻自己。孩子崩溃时,你不崩溃;孩子愤怒时,你不被点燃;孩子退缩时,你不催促。你只是<strong>在那里</strong>。</p>
-        </div>
-
-        <div class="container-quality">
-          <div class="cq-num">2</div>
-          <h4>过滤 <span class="cq-en">metabolizing</span></h4>
-          <p>能把孩子无法处理的强烈情绪,接进自己,经过自己的觉察(这就是完形的工作),再以孩子可以消化的形式还回去。Bion 称这个过程是"消化未消化的"。你成了孩子情绪的一个<strong>中转站</strong>,不是垃圾桶,也不是回声壁。</p>
-        </div>
-
-        <div class="container-quality">
-          <div class="cq-num">3</div>
-          <h4>存在 <span class="cq-en">being there</span></h4>
-          <p>孩子探索时,容器不消失;孩子撞了壁回来时,容器还在原地。容器的本质不是"做什么",而是"<strong>在</strong>"。孩子需要的不是一个全知全能的父母,而是一个<em>不会突然不见的</em>父母。</p>
-        </div>
-
-        <div class="section" style="margin-top:42px;">
-          <h3>完形给容器的能力 <span class="h-en">gestalt as the foundation</span></h3>
-          <p>九章手册里的每一个概念,都是让你成为容器的具体能力:</p>
-          <ul>
-            <li><strong>觉察</strong> —— 让你能区分孩子的情绪和你的情绪</li>
-            <li><strong>此时此刻</strong> —— 让你能真正在场,而不是在焦虑的未来里</li>
-            <li><strong>图形与背景</strong> —— 让你看见孩子,而不是问题</li>
-            <li><strong>接触边界</strong> —— 让你既能盛住,又不被吞没</li>
-            <li><strong>不融合</strong> —— 让孩子能扛自己的事</li>
-            <li><strong>看穿投射</strong> —— 让你不把自己的剧本压给孩子</li>
-            <li><strong>消化内摄</strong> —— 让你的教育是你想要的,不是被吞下的</li>
-            <li><strong>处理未完成</strong> —— 让你不再被童年遥控</li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <h3>容器不需要完美 <span class="h-en">good enough is enough</span></h3>
-          <p>温尼科特最重要的一句话是:<strong>"足够好的母亲"(good enough mother)</strong>。容器不需要完美 —— 完美的父母反而让孩子无法发展自己的现实感。容器只需要<em>在大部分时候足够稳定</em>。</p>
-          <p>允许自己有失败的时刻 —— 吼了、急了、控制了。重要的不是不发生,而是<strong>修复</strong>:回来,承认,连接。研究发现,孩子心理健康的关键不是父母从不犯错,而是父母会修复。</p>
-          <p>"破裂 — 修复"的循环,本身就是最深的爱的教育。它教孩子:关系可以受伤,也可以愈合。这比一个不出错的容器,更滋养。</p>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>第八章 · 未完成事件</button>
-          <button class="nav-btn next-btn"><span class="dir">— next —</span>附 · 日常实践清单</button>
-        </div>
-      </section>
-
-      <!-- M10 CHECKLIST -->
-      <section class="module" id="m-10">
-        <div class="module-num">APPENDIX · 附</div>
-        <h2 class="module-title">日常实践清单</h2>
-        <p class="module-title-en">a daily practice</p>
-
-        <p style="font-size:17px; margin-bottom: 36px; color: var(--ink-soft); line-height:1.9;">
-          内在工作不在读懂之后,在<em>每天的微小练习</em>里。这份清单可以打印出来贴在某个你常看见的地方 —— 不是要求,是邀请。
-        </p>
-
-        <div class="checklist-section">
-          <div class="cl-title">每日 · 三分钟自我觉察</div>
-          <ul>
-            <li>今天我和孩子<strong>在场</strong>的时间,有多少分钟?</li>
-            <li>我有没有被某个反应"自动驾驶"了?在哪一刻?</li>
-            <li>我此刻的情绪里,有多少是<strong>我自己</strong>的,有多少是被孩子激起的?</li>
-            <li>今天我是孩子的容器,还是漏水的瓶子?</li>
-          </ul>
-        </div>
-
-        <div class="checklist-section">
-          <div class="cl-title">每周 · 一次深度反思</div>
-          <ul>
-            <li>这周最让我焦虑或愤怒的<strong>一件事</strong>是什么?</li>
-            <li>如果切换图形,我能看见什么不同的可能性?</li>
-            <li>这件事和我自己的<strong>什么未完成</strong>,可能有关?</li>
-            <li>这周我有没有一次成功的"修复"?(吼了之后回来道歉、错怪之后承认……)</li>
-          </ul>
-        </div>
-
-        <div class="checklist-section">
-          <div class="cl-title">每月 · 一次边界审视</div>
-          <ul>
-            <li>我有没有<strong>替孩子做了他能做的事</strong>?</li>
-            <li>我有没有用我的焦虑/期待<strong>"染色"</strong>了孩子的体验?</li>
-            <li>我有没有为自己留出<strong>独立于孩子</strong>的生活、爱好、关系?</li>
-            <li>这个月我对自己的什么内摄,做了一点"咀嚼"?</li>
-          </ul>
-        </div>
-
-        <div class="checklist-section">
-          <div class="cl-title">每季 · 一封写给自己的信</div>
-          <ul>
-            <li>写给三个月前的自己:这三个月,我看见了什么?</li>
-            <li>哪些"应该"我开始不再相信?</li>
-            <li>我和孩子之间,哪个瞬间让我觉得"我是一个稳的存在"?</li>
-            <li>下个季度,我想对自己练习什么?</li>
-          </ul>
-        </div>
-
-        <div style="margin-top:60px; padding: 32px; background: var(--paper-light); border:1px solid var(--line); position:relative;">
-          <div style="position:absolute; top:-14px; left:24px; background: var(--cinnabar); color:var(--paper-light); padding:3px 14px; letter-spacing:4px; font-size:14px;">尾声</div>
-          <p style="font-size:17px; line-height:2; margin:0; color:var(--ink);">
-            做父母不是一个要完成的项目,是一段持续看见自己的旅程。完形教你看见此刻,容器教你承接彼此。<br><br>
-            当你愿意成为<strong>自己的</strong>容器 —— 看见自己、接纳自己、修复自己 —— 你就已经在成为孩子的容器了。<br><br>
-            你不需要先变完美,才能开始。<em>开始本身,就是修复。</em>
-          </p>
-        </div>
-
-        <div class="nav-buttons">
-          <button class="nav-btn prev-btn"><span class="dir">— previous —</span>整合 · 做孩子的容器</button>
-          <button class="nav-btn" disabled><span class="dir">— end —</span>手册到此</button>
-        </div>
-      </section>
-
-    </main>
+    <button class="narr-toggle-script" id="narrToggleScript">查看 / 收起朗读全文</button>
+    <div class="narr-script" id="narrScript"></div>
+
+    <div class="progress-card">
+      <div class="ring-wrap">
+        <svg width="76" height="76" viewBox="0 0 76 76">
+          <circle class="ring-bg" cx="38" cy="38" r="32"></circle>
+          <circle class="ring-fg" id="ringFg" cx="38" cy="38" r="32" stroke-dasharray="201" stroke-dashoffset="201"></circle>
+        </svg>
+        <div class="ring-text"><span class="pct" id="ringPct">0%</span></div>
+      </div>
+      <div class="progress-info">
+        <div class="pi-title" id="progTitle">开始你的旅程</div>
+        <div class="pi-sub" id="progSub">一周一章,慢慢消化。进度会自动保存。</div>
+      </div>
+    </div>
+    <div class="daily-banner">
+      <div class="db-label">今日提醒 · A THOUGHT FOR TODAY</div>
+      <div class="db-text" id="dailyText"></div>
+    </div>
+    <div class="sec-label"><span class="sl-cn">篇章</span><span class="sl-en">the chapters</span><span class="sl-line"></span></div>
+    <div class="card-list" id="cardList"></div>
+    <div class="sec-label"><span class="sl-cn">每日实践</span><span class="sl-en">daily practice</span><span class="sl-line"></span></div>
+    <div class="practice-entry" id="practiceEntry">
+      <div class="pe-icon">行</div>
+      <div class="pe-body"><div class="pe-title">实践打卡</div><div class="pe-sub">每日 · 每周 · 每月的自我觉察清单</div></div>
+      <div class="pe-arrow">→</div>
+    </div>
+  </div>
+  <div class="view" id="view-lesson">
+    <div class="topbar"><button class="back-btn" id="lessonBack">目录</button><div class="topbar-spacer"></div><div class="topbar-title" id="lessonTopTitle"></div></div>
+    <div class="lesson-content" id="lessonContent"></div>
+  </div>
+  <div class="view" id="view-practice">
+    <div class="topbar"><button class="back-btn" id="practiceBack">目录</button><div class="topbar-spacer"></div><div class="topbar-title">实践打卡</div></div>
+    <div class="practice-content">
+      <div class="streak-card">
+        <div class="sc-flame">🔥</div>
+        <div class="sc-body"><div class="sc-num" id="streakNum">0</div><div class="sc-label">连续觉察天数</div></div>
+        <button class="sc-checkin" id="checkinBtn">今日觉察</button>
+      </div>
+      <div id="practiceGroups"></div>
+      <div class="closing-box">
+        <div class="cb-tag">尾声</div>
+        <p>做父母不是一个要完成的项目,是一段持续看见自己的旅程。当你愿意成为<strong>自己的</strong>容器 —— 看见自己、接纳自己、修复自己 —— 你就已经在成为孩子的容器了。<br><br>你不需要先变完美,才能开始。<em>开始本身,就是修复。</em></p>
+      </div>
+      <button class="reset-btn" id="resetBtn">重置本周/本月勾选</button>
+    </div>
   </div>
 </div>
-
 <script>
-  const tocItems = document.querySelectorAll('#toc-list li');
-  const modules = document.querySelectorAll('.module');
-  const order = Array.from(modules).map(m => m.id);
+const DAILY_THOUGHTS = [
+  "我此刻在哪里?在过去的担心里,还是真正在孩子面前?",
+  "这是他的人生功课。我陪伴,不替代。",
+  "我此刻聚焦的图形是什么?我漏看了什么背景?",
+  "这股情绪,有多少属于这个孩子,有多少属于过去的我?",
+  "我看到你很难,我在这里。—— 今天试着只说这一句。",
+  "情绪过去后,谁还走不出来?那是共情和融合的分界。",
+  "这份担心的音量,和事情本身相称吗?",
+  "这是他的需要,还是我的需要?",
+  "我相信这句'应该'吗?它从哪里来?",
+  "容器不需要完美,只需要足够稳定。",
+  "破裂之后能修复,本身就是最深的爱的教育。"
+];
+const LESSONS = [
+  { id:'intro', num:'序', numEn:'PREFACE', title:'为什么是完形,为什么是容器', titleEn:'an opening note',
+    html:`
+      <p class="intro-lead"><span class="fc">这</span>是一本给父母自己看的小册子。它不讲怎么教孩子读书、怎么管屏幕、怎么和老师沟通。它要陪你做的,是更慢一点的工作 —— 看见你自己。</p>
+      <p class="intro-lead">因为在亲子关系里,真正的边界不来自规则,而来自父母对自身的清晰。真正的"容器",不是耐心训练出来的,而是当你的内在足够稳,你自然成了孩子可以靠的地方。</p>
+      <div class="block"><h3>两个传统的交汇</h3>
+        <p><strong>完形治疗</strong>(Gestalt Therapy)由 Fritz Perls 在 1950 年代创立,核心信念是:<em>人是整体的,改变发生在觉察之中</em>。它教你看清此刻、看清你的反应从哪里来。</p>
+        <p><strong>容器</strong>(Container)这个比喻来自 Bion 和温尼科特的"抱持环境"。一个好的容器能盛放孩子的情绪、混乱、失败 —— 不被吞没,也不急着修复。</p>
+        <p>完形教你<strong>觉察</strong>,容器思维教你<strong>承接</strong>。这本手册把两者编织在一起。</p></div>
+      <div class="block"><h3>怎么使用</h3>
+        <p>不必一次读完。建议一周一章,读完后给自己 5–10 分钟,让那一章的问题在心里发酵。「辨」和「检」两章是对「融合」「投射」的延伸,可以配着读。</p>
+        <p>每章底部可以写下你自己的反思,会自动保存。开车时,可以用首页的语音朗读反复听。</p></div>` },
+  { id:'m1', num:'一', numEn:'CHAPTER ONE', title:'觉察', titleEn:'awareness',
+    quote:{t:'"Awareness in itself is curative."', s:'— Fritz Perls'},
+    html:`
+      <div class="block"><h3>是什么</h3>
+        <p>觉察不是分析,不是评判,而是单纯地<strong>注意到此刻发生了什么</strong> —— 我身体的感觉、我的情绪、我的呼吸,孩子的表情,房间的温度。</p>
+        <p>完形相信:当一个人真正觉察到自己在做什么、感受什么,改变就已经在发生。我们大部分的"问题",不是因为不知道答案,而是处在<em>无觉察</em>的自动驾驶里。</p></div>
+      <div class="block"><h3>为什么对父母重要</h3>
+        <p>大多数对孩子的情绪化反应,都发生在父母无觉察的自动驾驶状态。当孩子拖延、顶嘴、失利,我们的反应往往是几十年前内化的模式 —— 来自我们自己父母的某个表情、某句话 —— 而不是此刻这个孩子真正需要的回应。</p>
+        <p>觉察让你在"刺激"和"反应"之间撑开一条缝。那条缝里,才有选择。</p></div>
+      <div class="block"><h3>反思问题</h3>
+        <div class="box q"><span class="box-tag">问</span><p>今天我和孩子互动时,我<strong>最先注意到的</strong>是什么?是他的表现,还是他的状态?</p></div></div>
+      <div class="block"><h3>日常练习</h3>
+        <div class="box p"><span class="box-tag">行</span><p>每次和孩子开口前,先深吸一口气,在心里问:<strong>"我此刻在哪里?"</strong> —— 在过去(担心他变成什么样)?在未来(怕他考不好)?还是真正在他面前?</p></div></div>` },
+  { id:'m2', num:'二', numEn:'CHAPTER TWO', title:'此时此刻', titleEn:'here & now',
+    quote:{t:'"Nothing exists except the now."', s:'— Fritz Perls'},
+    html:`
+      <div class="block"><h3>是什么</h3>
+        <p>完形最革命性的主张:<strong>生活只发生在当下</strong>。所有的接触、所有真实的改变,都只能在此刻发生。</p>
+        <p>过去和未来当然存在,但它们存在的方式,是<em>此刻我对它们的想法</em>。当你为孩子的明天焦虑,你不是在明天,你是在今天的焦虑里 —— 而你的孩子,正在今天等你看见他。</p></div>
+      <div class="block"><h3>为什么对父母重要</h3>
+        <p>教育焦虑的本质,是父母活在一个<strong>"未来的孩子"</strong>里 —— 他将来能不能进好学校、立足社会、会不会幸福。我们看不见眼前此刻这个样子的他。</p>
+        <p>但孩子是被<em>此刻</em>滋养长大的,不是被未来。你每一次此刻的注视、回应,都在塑造他对自己的感受。</p></div>
+      <div class="block"><h3>反思问题</h3>
+        <div class="box q"><span class="box-tag">问</span><p>我和孩子最近的几次冲突,有多少是关于<strong>现在的他</strong>,有多少是关于<strong>我想象中那个未来的他</strong>?</p></div></div>
+      <div class="block"><h3>日常练习</h3>
+        <div class="box p"><span class="box-tag">行</span><p>每天给孩子留 <strong>15 分钟纯粹的此刻</strong> —— 不规划、不评估、不教育、不引导,只和他一起做一件他自己选的事。哪怕他选的是发呆。</p></div></div>` },
+  { id:'m3', num:'三', numEn:'CHAPTER THREE', title:'图形与背景', titleEn:'figure & ground',
+    quote:{t:'看见,是一种选择。', s:'— gestalt perception'},
+    html:`
+      <div class="block"><h3>是什么</h3>
+        <p>这是完形心理学最早的发现 —— 来自知觉研究。在任何画面里,我们的注意力<strong>只能聚焦一个"图形"</strong>(figure),其余退为"背景"(ground)。</p>
+        <p>同一张画,聚焦不同,看到的东西完全不同。著名的"老妇人/少女"错觉就是这样:画面没变,但你看哪里,决定了你看到谁。</p></div>
+      <div class="block"><h3>为什么对父母重要</h3>
+        <p>当孩子写作业拖延、哭闹、顶嘴 —— 你心里的<em>图形</em>是什么,决定了你看见哪个孩子:</p>
+        <ul>
+          <li>图形 = "他不努力" → 一个<strong>懒惰</strong>的孩子</li>
+          <li>图形 = "他在害怕失败" → 一个<strong>紧张</strong>的孩子</li>
+          <li>图形 = "他需要休息" → 一个<strong>疲惫</strong>的孩子</li>
+          <li>图形 = "他在试探边界" → 一个<strong>测试关系</strong>的孩子</li>
+        </ul>
+        <p>同一个行为,四种图形,通向四种完全不同的回应。许多教育冲突的源头,不在孩子身上,在父母选择把什么当成图形。</p></div>
+      <div class="block"><h3>反思问题</h3>
+        <div class="box q"><span class="box-tag">问</span><p>最近让我焦虑的孩子的某个"问题",我此刻的图形是什么?如果<strong>切换一个图形</strong>,我会看见什么不一样的孩子?</p></div></div>
+      <div class="block"><h3>日常练习</h3>
+        <div class="box p"><span class="box-tag">行</span><p>下次又陷入"他怎么又……"的情绪时,刻意停一下,问自己:<strong>"我此刻聚焦的图形是什么?我是否漏看了什么背景?"</strong></p></div></div>` },
+  { id:'m4', num:'四', numEn:'CHAPTER FOUR', title:'接触与边界', titleEn:'contact boundary',
+    quote:{t:'真正的相遇,需要先有"我"和"你"。', s:'— gestalt principle'},
+    html:`
+      <div class="block"><h3>是什么</h3>
+        <p>完形里有个核心概念叫"接触边界"。它说的是 —— <strong>健康的关系建立在有边界的接触之上</strong>。接触不是融合。真正的接触,需要两个独立的人之间有清晰的界限,才能产生真实的相遇。</p>
+        <p>就像两个圆相切 —— 它们碰到了彼此,但仍是两个圆。如果合二为一,反而失去了"相遇"。</p></div>
+      <div class="block"><h3>为什么对父母重要</h3>
+        <p>"我都是为你好"常常是边界崩塌的信号。它表面是爱,底下藏着:<em>"我无法忍受你的人生有任何我不喜欢的部分。"</em></p>
+        <p>健康的父母接触是:</p>
+        <ul><li>我清楚什么是<strong>我的情绪</strong>,什么是<strong>你的情绪</strong></li>
+        <li>我能在场,但不替你感受</li>
+        <li>我能给建议,但不强加选择</li>
+        <li>我能为你担忧,但不让我的担忧成为你的负担</li></ul></div>
+      <div class="block"><h3>反思问题</h3>
+        <div class="box q"><span class="box-tag">问</span><p>我和孩子之间的边界,<strong>哪些地方太松</strong>(我替他做了他能做的事/承担了他的情绪)?<strong>哪些地方太硬</strong>(我没真正听见他)?</p></div></div>
+      <div class="block"><h3>日常练习</h3>
+        <div class="box p"><span class="box-tag">行</span><p>今天试一次:孩子有情绪时,<strong>只说一句话</strong> —— "我看到你很___,我在这里。" 不分析、不解决、不评论、不教育。只是看见,只是在。</p></div></div>` },
+  { id:'m5', num:'五', numEn:'CHAPTER FIVE', title:'融合', titleEn:'confluence',
+    quote:{t:'当我说"我们",我有没有问过你?', s:"— a parent's reflection"},
+    html:`
+      <div class="block"><h3>是什么</h3>
+        <p>融合(confluence)是完形里一种<strong>不健康的接触模式</strong>:"我"和"你"的边界消失了。我感觉你的感觉、你的成功是我的成功、你的失败是我的失败 —— 而我以为这就是爱。</p>
+        <p>融合的标志是:经常说"我们"而不是"我和你"。"我们今天作业还没写"、"我们这次考砸了"。</p></div>
+      <div class="block"><h3>为什么对父母重要</h3>
+        <p>华人家庭尤其容易陷入亲子融合,这是文化里"以家为单位"的根深蒂固。但融合带来一个隐性伤害 —— <strong>它剥夺了孩子独立体验自己人生的机会</strong>。</p>
+        <p>孩子考砸,母亲比孩子还难受;孩子受委屈,父亲冲进学校理论。这看似爱,实则是:<em>"你的情绪太大,由我来感受;你的失败太重,由我来承担。"</em></p>
+        <p>融合让孩子失去练习"扛住自己"的机会。他长大后,要么继续依附,要么用激烈的方式切断,才能找到自己。</p></div>
+      <div class="block"><h3>反思问题</h3>
+        <div class="box q"><span class="box-tag">问</span><p>最近一次孩子受挫时,我体验到的那股情绪,<strong>有多少是他的,有多少是我自己的</strong>?那些是我的部分,被什么激起来的?</p></div></div>
+      <div class="block"><h3>日常练习</h3>
+        <div class="box p"><span class="box-tag">行</span><p>练习一句心咒,在感觉被孩子情绪卷走时默念:<strong>"这是他的人生功课。我陪伴,不替代。我在岸上,不跳进河里。"</strong></p></div>
+        <p style="font-size:14px;color:var(--ink-faint);margin-top:14px;">想分清"融合"和"共情"?见下一章「辨」。</p></div>` },
+  { id:'m5b', num:'辨', numEn:'A DISTINCTION', title:'共情 还是 融合', titleEn:'empathy vs confluence', deep:true,
+    quote:{t:'共情是"我和你在一起,但我还是我";融合是"我变成了你,于是没有人在岸上了"。', s:'— the core difference'},
+    html:`
+      <div class="block"><h3>为什么难分</h3>
+        <p>融合常常<strong>伪装成共情</strong>,连当事人自己都分不清。两者都是"我担心孩子、我心疼孩子"。核心差别只有一个字:<strong>边界</strong>。</p>
+        <p>共情时,你和孩子之间始终有一条线;融合时,这条线消失了。</p>
+        <p>共情像<em>站在岸边</em> —— 我懂那水有多凉,但我没掉进去,所以我有力气伸手拉你。融合像<em>跳进了水里</em> —— 和你一起往下沉,结果两个人都需要被救。</p></div>
+      <div class="block"><h3>五个区分点</h3>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">①</span>边界</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">共情</span>边界还在 —— 我贴近你,但清楚那是<b>你的</b>感受。</div>
+          <div class="vp-cell con"><span class="lab">融合</span>边界消失 —— 你的感受直接变成<b>我的</b>。</div></div></div>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">②</span>情绪的归属</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">共情</span>「这是<b>他的</b>难过。」情绪有主人。</div>
+          <div class="vp-cell con"><span class="lab">融合</span>「<b>我们</b>好难过。」主体糊掉了。</div></div></div>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">③</span>事后,谁需要被安慰?</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">共情</span>安慰完孩子,<b>我自己是稳的</b>。</div>
+          <div class="vp-cell con"><span class="lab">融合</span>孩子缓过来了,<b>我却还走不出来</b> —— 甚至要孩子反过来照顾我。</div></div></div>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">④</span>孩子的体验</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">共情</span>「我被看见、被陪伴 —— 而我依然是我。」</div>
+          <div class="vp-cell con"><span class="lab">融合</span>「我的情绪淹没了爸妈 —— 我得为他们的情绪负责。」</div></div></div>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">⑤</span>还能不能行动?</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">共情</span>还有余力去回应、支持、伸手拉你。</div>
+          <div class="vp-cell con"><span class="lab">融合</span>一起瘫在情绪里,谁也帮不了谁。</div></div></div></div>
+      <div class="block"><h3>最好用的自检</h3>
+        <div class="box q"><span class="box-tag">问</span><p><strong>情绪过去之后,谁还走不出来?</strong> 如果孩子已经缓过来,你却比他还久陷在焦虑里 —— 那刚才大概率是融合,不是共情。</p></div></div>
+      <div class="block"><h3>别走向另一个极端</h3>
+        <p>共情不是冷冰冰地保持距离、置身事外地分析孩子 —— 那是另一种问题(疏离)。共情是<strong>有温度的</strong>,只是那份动情没有让你失去自己。<em>有温度,又有边界</em>,两个同时在,才是共情。</p>
+        <p style="margin-top:10px;">还有:融合不代表"坏"。它常常发生在最用心的父母身上 —— 不是爱得不够,是爱得太满,满到边界化掉了。发现自己在融合,不必自责,那只是一个信号:<strong>"该回岸上了。"</strong></p></div>` },
+  { id:'m6', num:'六', numEn:'CHAPTER SIX', title:'投射', titleEn:'projection',
+    quote:{t:'我以为我在看你,其实我在看我自己。', s:'— on parental projection'},
+    html:`
+      <div class="block"><h3>是什么</h3>
+        <p>投射(projection):把自己内在的东西 —— 情绪、欲望、恐惧、未实现的梦想 —— 放到别人身上,然后<strong>误以为那是对方的</strong>。</p>
+        <p>投射不是说谎,而是无觉察。我们真的相信自己看到的是孩子,但其实看到的是自己投在孩子身上的影子。</p></div>
+      <div class="block"><h3>为什么对父母重要</h3>
+        <p>父母对孩子的投射,通常装在"为他好"的外壳里 ——</p>
+        <ul><li>我小时候没机会学钢琴 → 我儿子<strong>"喜欢"</strong>钢琴</li>
+        <li>我曾被同学排挤 → 我女儿<strong>"很在乎"</strong>社交</li>
+        <li>我害怕过平庸 → 我孩子<strong>"必须"</strong>优秀</li>
+        <li>我吃过没学好英语的苦 → 我孩子"必须"双语</li></ul>
+        <p>每条都可能是合理需求,也可能<em>大部分是父母的投射</em>。标志是:当孩子表现得和你的投射不同时,你会有不成比例的失望或愤怒 —— 因为那不是关于他,是关于你内在那个未被疗愈的部分。</p></div>
+      <div class="block"><h3>反思问题</h3>
+        <div class="box q"><span class="box-tag">问</span><p>我<strong>最希望孩子拥有</strong>的特质或成就是什么?它和我自己人生里的某个缺憾、某个伤口,有没有关系?</p></div></div>
+      <div class="block"><h3>日常练习</h3>
+        <div class="box p"><span class="box-tag">行</span><p>每当你<em>强烈</em>希望孩子做某件事时,多问一次:<strong>"这是他的需要,还是我的需要?如果他不做,我难受的是什么?"</strong> —— 那个难受,通常就是投射的源头。</p></div>
+        <p style="font-size:14px;color:var(--ink-faint);margin-top:14px;">想当场分清担心是不是投射?见下一章「检」。</p></div>` },
+  { id:'m6b', num:'检', numEn:'A SELF-CHECK', title:'我的担心,是投射吗', titleEn:'is this projection?', deep:true,
+    quote:{t:'目标不是否定关心,而是认出属于自己的那一部分,把它放下,让关心回到孩子身上。', s:'— a gentle reminder'},
+    html:`
+      <div class="block"><h3>为什么难</h3>
+        <p>投射从内部感觉起来,和"真实的关心"一模一样。两者都是"我担心孩子"。区别不在感受本身,而在这份担心的<strong>来源</strong>和<strong>形状</strong>。下面五个自检,从最好用的开始。</p></div>
+      <div class="block"><h3>五个自检</h3>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">①</span>这份担心的"音量",和事情本身匹配吗?</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">真实关心</span>强度和事情相称 —— 小事小反应,大事大反应。</div>
+          <div class="vp-cell con"><span class="lab">可能是投射</span>反应"过大"了 —— 小事却激起不成比例的焦虑或愤怒。那个"过头"的部分,通常是你自己的。</div></div></div>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">②</span>如果他不照我担心的去做,我难受的到底是什么?</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">真实关心</span>我担心的是<b>他</b>会承受的具体后果。</div>
+          <div class="vp-cell con"><span class="lab">可能是投射</span>我难受的其实是<b>我自己</b>的感觉 —— 丢脸、失控、"我没做好父母"。</div></div></div>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">③</span>这个担心,在我自己的人生里有没有"原型"?</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">真实关心</span>来自眼前这个孩子的真实处境和性格。</div>
+          <div class="vp-cell con"><span class="lab">可能是投射</span>它精准踩在我的伤口上 —— 我吃过的苦、没实现的梦、最怕成为的样子。</div></div></div>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">④</span>我担心的,是真实的他,还是想象出来的他?</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">真实关心</span>有具体的、最近的、可观察的证据。</div>
+          <div class="vp-cell con"><span class="lab">可能是投射</span>更多是脑中的剧本和"万一" —— 把想象的危险,贴到没那么危险的孩子身上。</div></div></div>
+        <div class="vs-pair"><div class="vp-q"><span class="vp-n">⑤</span>换一个孩子,我还会这么担心吗?</div><div class="vp-row">
+          <div class="vp-cell emp"><span class="lab">真实关心</span>会 —— 因为担心来自处境本身。</div>
+          <div class="vp-cell con"><span class="lab">可能是投射</span>不会 —— 这份担心是"专属"的,只有这孩子的这一点能精准点燃我。专属,往往连着我自己。</div></div></div></div>
+      <div class="block"><h3>最好用的两个</h3>
+        <div class="box q"><span class="box-tag">问</span><p><strong>① 看音量:</strong>反应过大,差额几乎一定是你自己的东西被激活了。<br><strong>② 追问主语:</strong>那个难受的主语,一旦从"他"滑成"我",投射的成分就在升高。</p></div></div>
+      <div class="block"><h3>诚实的提醒</h3>
+        <p>投射和真实关心几乎<strong>总是混在一起</strong>,很少纯粹。你担心孩子社交,可能 70% 是真看到他孤单,30% 是你当年被排挤的痛。</p>
+        <p>目标不是把担心归类成"纯投射"然后否定它,而是<strong>把那 30% 认出来、放下来</strong> —— 剩下的真实关心,反而看得更清、回应得更准。</p>
+        <p style="margin-top:10px;">发现投射时,正确的下一句不是"我真糟糕",而是:<em>"原来这块是我的,那我先安顿我自己,别让它落到孩子头上。"</em> 这本身,就是在做容器。</p></div>` },
+  { id:'m7', num:'七', numEn:'CHAPTER SEVEN', title:'内摄', titleEn:'introjection',
+    quote:{t:'我们都吞下了一些没消化的东西,然后用它教孩子。', s:'— on inherited beliefs'},
+    html:`
+      <div class="block"><h3>是什么</h3>
+        <p>内摄(introjection):像吞咽一样,把别人(父母、老师、文化、社会)的观点<strong>不加咀嚼地</strong>接收下来,变成"我的"信念。</p>
+        <p>它的特点是:你以为这是你的想法,其实是你早年从某处吞下去的,从未真正消化、检验过。它住在你心里,但不是你长出来的。</p></div>
+      <div class="block"><h3>为什么对父母重要</h3>
+        <p>我们带着<em>大量的内摄</em>在做父母,而常常没意识到 ——</p>
+        <ul><li>"孩子不能输在起跑线上"</li>
+        <li>"严师出高徒,棍棒底下出孝子"</li>
+        <li>"三岁看大,七岁看老"</li>
+        <li>"孩子要懂事,要听话"</li>
+        <li>"现在不逼他,将来他会怪你"</li></ul>
+        <p>这些不是你<em>思考</em>出来的,是你<em>吞下去</em>的。它们每天塑造你的教育方式,而你以为那是"理所当然"。</p>
+        <p>内摄的危险在于:它替你做了决定,你还以为是你自己做的。</p></div>
+      <div class="block"><h3>反思问题</h3>
+        <div class="box q"><span class="box-tag">问</span><p>关于"什么是好父母"或"什么是好孩子",我心里<strong>最响亮的那句话</strong>是什么?是谁说的?此刻成年的我,真的同意它吗?</p></div></div>
+      <div class="block"><h3>日常练习</h3>
+        <div class="box p"><span class="box-tag">行</span><p>列出 5 句你脑海里关于教育最常出现的"应该"。一句一句问:<strong>"我真的相信这句话吗?如果不信,我相信什么?"</strong> —— 写下来。这是把内摄咀嚼出来的开始。</p></div></div>` },
+  { id:'m8', num:'八', numEn:'CHAPTER EIGHT', title:'未完成事件', titleEn:'unfinished business',
+    quote:{t:'那些没说完的话,会一直找出口。', s:'— gestalt principle'},
+    html:`
+      <div class="block"><h3>是什么</h3>
+        <p>未完成事件(unfinished business):过去未被充分表达、未被处理的情绪体验,会带着张力,<strong>寻找当下的出口</strong>。</p>
+        <p>完形发现:人的心理系统天然追求"完形"(closure)—— 一件事如果没被充分经历、表达、消化,它就不会过去。它会在新情境里反复重演,直到被看见。</p></div>
+      <div class="block"><h3>为什么对父母重要</h3>
+        <p>我们童年里那些没被听见的委屈、没被肯定的成就、没被允许的愤怒 —— 它们没有消失。等我们成为父母后,会通过孩子<strong>重新激活</strong>。</p>
+        <ul><li>孩子哭闹时我们格外烦躁 → 也许小时候我们的哭从不被允许</li>
+        <li>孩子顶嘴时我们格外愤怒 → 也许我们从来不敢顶嘴</li>
+        <li>孩子退缩时我们格外焦急 → 也许那让我们想起曾经不敢往前的自己</li></ul>
+        <p>那个"<em>格外</em>",往往就是未完成事件在说话。它说:"看见我。"</p>
+        <p>做父母,某种意义上是和自己童年最深的一次重逢。</p></div>
+      <div class="block"><h3>反思问题</h3>
+        <div class="box q"><span class="box-tag">问</span><p>孩子的<strong>哪个反应或特质</strong>最容易激怒我或让我焦虑?当它出现时,我身体哪里紧?它让我想起谁?(可能是小时候的自己,或我的父母)</p></div></div>
+      <div class="block"><h3>日常练习</h3>
+        <div class="box p"><span class="box-tag">行</span><p>当你被孩子"按到按钮"、情绪突然炸开时,深呼吸,在心里说:<strong>"现在这股力量,有多少属于这个孩子,有多少属于过去的我?"</strong> 它把你从过去拉回此刻。</p></div></div>` },
+  { id:'m9', num:'终', numEn:'INTEGRATION', title:'做孩子的容器', titleEn:'becoming the container',
+    quote:{t:"The good-enough mother starts off with an almost complete adaptation to her infant's needs.", s:'— D. W. Winnicott'},
+    html:`
+      <div class="block"><h3>什么是容器</h3>
+        <p>温尼科特说的"抱持环境",Bion 说的"容器",其实是同一件事 —— <strong>一个孩子可以靠的地方</strong>。容器不是完美的父母,而是一个<em>稳定的存在</em>,它有三种品质 ——</p></div>
+      <div class="cq"><div class="cq-n">1</div><h4>承接 <span class="cq-en">holding</span></h4><p>能盛住孩子的情绪、混乱、失败,而不打翻自己。孩子崩溃时你不崩溃,孩子愤怒时你不被点燃,孩子退缩时你不催促。你只是<strong>在那里</strong>。</p></div>
+      <div class="cq"><div class="cq-n">2</div><h4>过滤 <span class="cq-en">metabolizing</span></h4><p>能把孩子无法处理的强烈情绪接进自己,经过自己的觉察(这就是完形的工作),再以孩子可消化的形式还回去。你是<strong>中转站</strong>,不是垃圾桶,也不是回声壁。</p></div>
+      <div class="cq"><div class="cq-n">3</div><h4>存在 <span class="cq-en">being there</span></h4><p>孩子探索时容器不消失,孩子撞壁回来时容器还在原地。容器的本质不是"做什么",而是"<strong>在</strong>"。孩子需要的不是全知全能的父母,而是<em>不会突然不见的</em>父母。</p></div>
+      <div class="block" style="margin-top:36px;"><h3>完形给容器的能力</h3>
+        <ul><li><strong>觉察</strong> —— 区分孩子的情绪和你的情绪</li>
+        <li><strong>此时此刻</strong> —— 真正在场,而非在焦虑的未来</li>
+        <li><strong>图形与背景</strong> —— 看见孩子,而非问题</li>
+        <li><strong>接触边界 / 不融合</strong> —— 既能盛住,又不被吞没</li>
+        <li><strong>共情而非融合</strong> —— 站在岸上,才有力气拉他</li>
+        <li><strong>看穿投射 / 消化内摄</strong> —— 不把自己的剧本压给孩子</li>
+        <li><strong>处理未完成</strong> —— 不再被童年遥控</li></ul></div>
+      <div class="block"><h3>容器不需要完美</h3>
+        <p>温尼科特最重要的一句话是:<strong>"足够好的母亲"(good enough mother)</strong>。容器只需要<em>在大部分时候足够稳定</em>。</p>
+        <p>允许自己有失败的时刻 —— 吼了、急了、控制了。重要的不是不发生,而是<strong>修复</strong>:回来,承认,连接。研究发现,孩子心理健康的关键不是父母从不犯错,而是父母会修复。</p>
+        <p>"破裂 — 修复"的循环,本身就是最深的爱的教育。它教孩子:关系可以受伤,也可以愈合。</p></div>` }
+];
+const PRACTICE = [
+  { title:'每日', en:'daily', key:'d', items:[
+    '今天我和孩子在场的时间,有多少分钟?',
+    '我有没有被某个反应"自动驾驶"了?在哪一刻?',
+    '我此刻的情绪里,有多少是我自己的,有多少是被孩子激起的?',
+    '今天我是孩子的容器,还是漏水的瓶子?'
+  ]},
+  { title:'每周', en:'weekly', key:'w', items:[
+    '这周最让我焦虑或愤怒的一件事是什么?',
+    '如果切换图形,我能看见什么不同的可能性?',
+    '那件事里,我是共情,还是滑向了融合?',
+    '这周我有没有一次成功的"修复"?'
+  ]},
+  { title:'每月', en:'monthly', key:'m', items:[
+    '我有没有替孩子做了他能做的事?',
+    '我最近的某个担心,有多少是投射?',
+    '我有没有为自己留出独立于孩子的生活、爱好、关系?',
+    '这个月我对自己的什么内摄,做了一点"咀嚼"?'
+  ]}
+];
+const NARRATION = [
+  { label:'开场', text:'这是一份给父母自己的内在功课。完形教你觉察,容器教你承接。下面把核心内容,一个一个浓缩讲给你听。' },
+  { label:'一 · 觉察', text:'第一,觉察。觉察不是分析,是单纯注意到此刻发生了什么——我的情绪、我的呼吸、孩子的状态。大部分对孩子的情绪化反应,都发生在没觉察的自动驾驶里。觉察,就是在刺激和反应之间,撑开一条缝。那条缝里,才有选择。一个练习:开口前先问自己,我此刻在哪里?在过去的担心,在未来的焦虑,还是真正在孩子面前?' },
+  { label:'二 · 此时此刻', text:'第二,此时此刻。生活只发生在当下。教育焦虑的本质,是父母活在一个想象中的、未来的孩子里,而看不见眼前这个此刻的他。但孩子是被此刻滋养长大的,不是被未来。每天给他十五分钟纯粹的当下:不规划,不评估,不教育,只是和他一起,做一件他选的事。' },
+  { label:'三 · 图形与背景', text:'第三,图形与背景。同一个画面,你聚焦哪里,决定了你看见什么。孩子拖延,如果你的焦点是他不努力,你看到一个懒孩子;如果焦点是他在怕失败,你看到一个紧张的孩子。同一个行为,不同的图形,通向完全不同的回应。下次又陷入他怎么又这样的时候,停一下问:我此刻聚焦的图形是什么?我漏看了什么背景?' },
+  { label:'四 · 接触与边界', text:'第四,接触与边界。健康的关系,建立在有边界的接触上。接触不是融合,像两个圆相切,碰到彼此,但仍是两个圆。我都是为你好,常常是边界塌掉的信号。健康的接触是:我清楚什么是我的情绪,什么是你的;我能在场,但不替你感受。试一次:孩子有情绪时,只说一句,我看到你很难,我在这里。不分析,不解决,只是看见。' },
+  { label:'五 · 融合', text:'第五,融合。融合是边界消失:你的失败变成我的失败,你的痛变成我的痛,而我以为这就是爱。华人家庭特别容易这样。但融合会剥夺孩子独立扛住自己的机会。在感觉被孩子情绪卷走时,默念一句:这是他的人生功课,我陪伴,不替代;我在岸上,不跳进河里。' },
+  { label:'辨 · 共情还是融合', text:'接着,辨别共情和融合,这是最多父母会卡住的地方,因为融合常常伪装成共情。区别在边界。共情是,我理解你的感受,但那始终是你的,我像站在岸边,所以我有力气拉你。融合是,我感受你的感受,我跳进了水里,和你一起往下沉。最好用的一个自检是:情绪过去之后,谁还走不出来?如果孩子已经缓过来,你却比他还久陷在焦虑里,那刚才大概率是融合。一句话记住:共情是,我和你在一起,但我还是我;融合是,我变成了你,于是没有人在岸上了。' },
+  { label:'六 · 投射', text:'第六,投射。投射,是把我自己内在的东西,恐惧、缺憾、没实现的梦,放到孩子身上,然后以为那是他的。它通常装在为他好的外壳里。我小时候没学成的,我孩子必须学;我曾经怕的,我孩子一定要避开。' },
+  { label:'检 · 是投射吗', text:'怎么分辨我的担心是不是投射?两个最实用的问题。第一,看音量:这份担心,和事情本身相称吗?一件小事却激起你不成比例的焦虑或愤怒,那个过头的部分,通常是你自己的。第二,追问:如果孩子不照我担心的去做,我难受的到底是什么?如果焦点从他会怎样,悄悄滑回了我会怎样、别人怎么看我,投射的成分就在升高。记住,担心和投射常常混在一起,目标不是否定关心,而是认出属于你自己的那一部分,把它放下,让关心回到孩子身上。' },
+  { label:'七 · 内摄', text:'第七,内摄。内摄,是把别人和文化的观点,不加咀嚼地吞下去,变成我的信念。不能输在起跑线,严师出高徒,现在不逼他将来他会怪你,这些不是你想出来的,是你吞下去的,却每天在替你做决定。找个时间,列出几句你脑子里最响的应该,一句一句问:我真的相信它吗?如果不信,我相信什么?' },
+  { label:'八 · 未完成事件', text:'第八,未完成事件。我们童年里没被听见的委屈,没被允许的愤怒,不会消失,它们等到我们做了父母,通过孩子重新激活。孩子哭,你格外烦;孩子顶嘴,你格外怒;那个格外,往往就是过去的你在说话。被孩子按到按钮、情绪炸开时,深呼吸,问一句:现在这股力量,有多少属于这个孩子,有多少属于过去的我?' },
+  { label:'终 · 做孩子的容器', text:'最后,做孩子的容器。容器有三个品质:承接,盛住他的情绪而不打翻自己;过滤,把他无法消化的情绪接过来,经过你的觉察,再以他能消化的形式还回去;存在,他探索时你不消失,他回来时你还在原地。前面这些概念,都是让你成为容器的能力。而容器不需要完美。温尼科特说,做足够好的父母就够了。会吼、会急、会犯错,都没关系,重要的是修复:回来,承认,重新连接。破裂和修复的循环,本身就是最深的爱的教育。' },
+  { label:'收尾', text:'你不需要先变完美,才能开始。开始本身,就是修复。这段你可以反复听。每次听,留意哪一句最打动你,那一句,往往就是此刻的你,最需要做的功课。' }
+];
+const STORE_KEY = 'gestalt_container_v1';
+let state = loadState();
+function loadState() {
+  try { const raw = localStorage.getItem(STORE_KEY); if (raw) return JSON.parse(raw); } catch(e) {}
+  return { read:{}, notes:{}, checks:{}, streak:0, lastCheckin:null };
+}
+function saveState() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e) {} }
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id===id));
+  window.scrollTo({top:0, behavior:'instant'});
+  if (id==='view-home') renderHome();
+  if (id==='view-practice') renderPractice();
+}
+function renderHome() {
+  const dayIdx = Math.floor(Date.now()/86400000) % DAILY_THOUGHTS.length;
+  document.getElementById('dailyText').textContent = '「 ' + DAILY_THOUGHTS[dayIdx] + ' 」';
+  const total = LESSONS.length;
+  const done = LESSONS.filter(l => state.read[l.id]).length;
+  const pct = Math.round(done/total*100);
+  document.getElementById('ringPct').textContent = pct + '%';
+  const circ = 201;
+  document.getElementById('ringFg').style.strokeDashoffset = circ - (circ*pct/100);
+  if (done===0) { document.getElementById('progTitle').textContent='开始你的旅程'; document.getElementById('progSub').textContent='共 '+total+' 个篇章。一周一章,慢慢消化。进度会自动保存。'; }
+  else if (done<total) { document.getElementById('progTitle').textContent='已读 '+done+' / '+total+' 章'; document.getElementById('progSub').textContent='保持节奏。内在工作不在快,在持续。'; }
+  else { document.getElementById('progTitle').textContent='你已读完全部篇章'; document.getElementById('progSub').textContent='现在,让它在每天的实践里活起来。'; }
+  const list = document.getElementById('cardList');
+  list.innerHTML = '';
+  LESSONS.forEach(l => {
+    const isRead = state.read[l.id];
+    const hasNote = state.notes[l.id] && state.notes[l.id].trim().length>0;
+    const card = document.createElement('div');
+    card.className = 'lesson-card' + (isRead?' done':'') + (l.deep?' deep':'');
+    let badge = isRead ? '<span class="badge read">已读</span>' : hasNote ? '<span class="badge note">笔记</span>' : '<span class="badge unread">未读</span>';
+    card.innerHTML = `<div class="lc-num">${l.num}</div><div class="lc-body"><div class="lc-title">${l.title}</div><div class="lc-en">${l.titleEn}</div></div><div class="lc-status">${badge}</div>`;
+    card.onclick = () => openLesson(l.id);
+    list.appendChild(card);
+  });
+}
+function openLesson(id) {
+  const idx = LESSONS.findIndex(l => l.id===id);
+  const l = LESSONS[idx];
+  document.getElementById('lessonTopTitle').textContent = l.num + ' · ' + l.title;
+  const c = document.getElementById('lessonContent');
+  const quoteHtml = l.quote ? `<div class="quote">${l.quote.t}<span class="src">${l.quote.s}</span></div>` : '';
+  const prev = idx>0 ? LESSONS[idx-1] : null;
+  const next = idx<LESSONS.length-1 ? LESSONS[idx+1] : null;
+  const isRead = state.read[id];
+  const noteVal = state.notes[id] || '';
+  c.innerHTML = `
+    <div class="lesson-num">${l.numEn} · ${l.num}</div>
+    <div class="lesson-title">${l.title}</div>
+    <div class="lesson-title-en">${l.titleEn}</div>
+    ${quoteHtml}${l.html}
+    <div class="reflect-zone">
+      <div class="rz-head"><div class="rz-title">我的反思</div><div class="rz-saved" id="savedFlag">已保存</div></div>
+      <textarea id="noteArea" placeholder="写下这一章让你想到的 —— 一个场景、一句话、一个被触动的地方。会自动保存。">${noteVal}</textarea>
+    </div>
+    <div class="lesson-foot">
+      <button class="mark-btn ${isRead?'done':''}" id="markBtn">${isRead?'✓ 已读完此章':'标记为已读'}</button>
+      <div class="pager">
+        <button class="prev" ${prev?'':'disabled'} data-go="${prev?prev.id:''}"><span class="pg-dir">— 上一章 —</span><span class="pg-name">${prev?prev.title:'已是开篇'}</span></button>
+        <button class="next" ${next?'':'disabled'} data-go="${next?next.id:''}"><span class="pg-dir">— 下一章 —</span><span class="pg-name">${next?next.title:'已是终章'}</span></button>
+      </div>
+    </div>`;
+  const ta = document.getElementById('noteArea');
+  let saveTimer;
+  ta.addEventListener('input', () => {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      state.notes[id] = ta.value; saveState();
+      const flag = document.getElementById('savedFlag');
+      flag.classList.add('show'); setTimeout(()=>flag.classList.remove('show'), 1500);
+    }, 500);
+  });
+  document.getElementById('markBtn').onclick = function() {
+    state.read[id] = !state.read[id]; saveState();
+    this.classList.toggle('done', state.read[id]);
+    this.textContent = state.read[id] ? '✓ 已读完此章' : '标记为已读';
+  };
+  c.querySelectorAll('.pager button').forEach(b => {
+    const go = b.getAttribute('data-go');
+    if (go) b.onclick = () => openLesson(go);
+  });
+  showView('view-lesson');
+}
+function renderPractice() {
+  document.getElementById('streakNum').textContent = state.streak || 0;
+  const today = new Date().toDateString();
+  const btn = document.getElementById('checkinBtn');
+  if (state.lastCheckin === today) { btn.textContent='今日已觉察 ✓'; btn.disabled=true; }
+  else { btn.textContent='今日觉察'; btn.disabled=false; }
+  const wrap = document.getElementById('practiceGroups');
+  wrap.innerHTML = '';
+  PRACTICE.forEach(g => {
+    const group = document.createElement('div');
+    group.className = 'cl-group';
+    let itemsHtml = '';
+    g.items.forEach((txt,i) => {
+      const ck = g.key+i; const checked = state.checks[ck];
+      itemsHtml += `<div class="check-item ${checked?'checked':''}" data-ck="${ck}"><div class="check-box"></div><div class="ci-text">${txt}</div></div>`;
+    });
+    group.innerHTML = `<div class="clg-title">${g.title}<span class="clg-en">${g.en}</span></div>${itemsHtml}`;
+    wrap.appendChild(group);
+  });
+  wrap.querySelectorAll('.check-item').forEach(item => {
+    item.onclick = () => {
+      const ck = item.dataset.ck;
+      state.checks[ck] = !state.checks[ck]; saveState();
+      item.classList.toggle('checked', state.checks[ck]);
+    };
+  });
+}
+function dailyCheckin() {
+  const today = new Date().toDateString();
+  if (state.lastCheckin === today) return;
+  const yesterday = new Date(Date.now()-86400000).toDateString();
+  state.streak = (state.lastCheckin === yesterday) ? (state.streak||0)+1 : 1;
+  state.lastCheckin = today; saveState(); renderPractice();
+}
+function resetWeekly() {
+  if (!confirm('确定要清空所有勾选吗?(连续天数和你的反思笔记不会受影响)')) return;
+  state.checks = {}; saveState(); renderPractice();
+}
 
-  function showModule(id) {
-    modules.forEach(m => m.classList.toggle('active', m.id === id));
-    tocItems.forEach(t => t.classList.toggle('active', t.dataset.target === id));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+/* ---------- Speech narration ---------- */
+let speechQueue = [];
+NARRATION.forEach((sec, si) => {
+  sec.text.split(/(?<=[。!?;])/).map(s=>s.trim()).filter(Boolean).forEach(sentence => {
+    speechQueue.push({ si, sentence });
+  });
+});
+let narrIndex = 0, narrPlaying = false, zhVoice = null;
+function pickVoice() {
+  const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  zhVoice = vs.find(v => v.lang && v.lang.toLowerCase().indexOf('zh')===0) || vs.find(v=>/chinese|中文|普通话/i.test(v.name)) || null;
+}
+if (window.speechSynthesis) { speechSynthesis.onvoiceschanged = pickVoice; pickVoice(); }
+function updateNarrUI() {
+  const bar = document.getElementById('narrBar');
+  const now = document.getElementById('narrNow');
+  const playBtn = document.getElementById('narrPlay');
+  const pctDone = speechQueue.length ? Math.round(narrIndex/speechQueue.length*100) : 0;
+  if (bar) bar.style.width = pctDone + '%';
+  if (playBtn) playBtn.textContent = narrPlaying ? '⏸ 暂停' : (narrIndex>0 && narrIndex<speechQueue.length ? '▶ 继续' : '朗读全部');
+  if (now) {
+    if (narrPlaying && speechQueue[narrIndex]) now.textContent = '正在朗读 · ' + NARRATION[speechQueue[narrIndex].si].label;
+    else if (narrIndex>0 && narrIndex<speechQueue.length) now.textContent = '已暂停 · ' + NARRATION[speechQueue[narrIndex].si].label;
+    else if (narrIndex>=speechQueue.length && speechQueue.length) now.textContent = '已听完。点击可从头再听。';
+    else now.textContent = '点一下开始朗读。可暂停,可从头听。';
   }
+}
+function speakNext() {
+  if (!narrPlaying) return;
+  if (narrIndex >= speechQueue.length) { narrPlaying=false; updateNarrUI(); return; }
+  const u = new SpeechSynthesisUtterance(speechQueue[narrIndex].sentence);
+  u.lang = 'zh-CN'; u.rate = 0.92; u.pitch = 1;
+  if (zhVoice) u.voice = zhVoice;
+  u.onend = () => { if (narrPlaying) { narrIndex++; updateNarrUI(); speakNext(); } };
+  u.onerror = () => { if (narrPlaying) { narrIndex++; speakNext(); } };
+  updateNarrUI();
+  speechSynthesis.speak(u);
+}
+function toggleNarration() {
+  if (!window.speechSynthesis) { alert('这个浏览器不支持语音朗读。可以在手机的 Safari 或 Chrome 里打开试试。'); return; }
+  if (narrPlaying) {
+    narrPlaying = false; speechSynthesis.cancel(); updateNarrUI();
+  } else {
+    if (narrIndex >= speechQueue.length) narrIndex = 0;
+    narrPlaying = true; speechSynthesis.cancel(); pickVoice(); speakNext();
+  }
+}
+function restartNarration() {
+  speechSynthesis && speechSynthesis.cancel();
+  narrPlaying = false; narrIndex = 0; updateNarrUI();
+}
 
-  tocItems.forEach(item => {
-    item.addEventListener('click', () => showModule(item.dataset.target));
-  });
+/* ---------- Wire up ---------- */
+document.getElementById('narrPlay').addEventListener('click', toggleNarration);
+document.getElementById('narrRestart').addEventListener('click', restartNarration);
+document.getElementById('practiceEntry').addEventListener('click', () => showView('view-practice'));
+document.getElementById('lessonBack').addEventListener('click', () => showView('view-home'));
+document.getElementById('practiceBack').addEventListener('click', () => showView('view-home'));
+document.getElementById('checkinBtn').addEventListener('click', dailyCheckin);
+document.getElementById('resetBtn').addEventListener('click', resetWeekly);
+const scriptBox = document.getElementById('narrScript');
+scriptBox.innerHTML = NARRATION.map(s => `<p><span class="ns-h">${s.label}　</span>${s.text}</p>`).join('');
+document.getElementById('narrToggleScript').addEventListener('click', () => scriptBox.classList.toggle('show'));
 
-  document.querySelectorAll('.next-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const current = document.querySelector('.module.active').id;
-      const idx = order.indexOf(current);
-      if (idx < order.length - 1) showModule(order[idx + 1]);
-    });
-  });
-
-  document.querySelectorAll('.prev-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const current = document.querySelector('.module.active').id;
-      const idx = order.indexOf(current);
-      if (idx > 0) showModule(order[idx - 1]);
-    });
-  });
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    const current = document.querySelector('.module.active').id;
-    const idx = order.indexOf(current);
-    if (e.key === 'ArrowRight' && idx < order.length - 1) showModule(order[idx + 1]);
-    if (e.key === 'ArrowLeft' && idx > 0) showModule(order[idx - 1]);
-  });
+renderHome();
+updateNarrUI();
 </script>
-
 </body>
 </html>
